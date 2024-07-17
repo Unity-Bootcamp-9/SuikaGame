@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abeb4da52d590548a37abaeb271ea17, type: 3}
+  m_Name: Swipe Input Action Reference
+  m_EditorClassIdentifier: 
+  PrimaryContact:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Primary Contact
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9768863e-88df-4a7d-bfaa-1629ecf63233
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 4826436161918688468, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
+      type: 3}
+  PrimaryPosition:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Primary Position
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9b3ecb79-0cc5-438c-b44f-af3fed7dd030
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -2353701454900763570, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
+      type: 3}
