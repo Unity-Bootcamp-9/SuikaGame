@@ -23,7 +23,7 @@ public struct Goal
     /// <summary>
     /// Creates a new Goal with the specified <see cref="GoalManager.OnboardingGoals"/>.
     /// </summary>
-    /// <param name="goal">The <see cref="GoalManager.OnboardingGoals"/> state to assign to this Goal.</param>
+    /// <param Value="goal">The <see cref="GoalManager.OnboardingGoals"/> state to assign to this Goal.</param>
     public Goal(GoalManager.OnboardingGoals goal)
     {
         CurrentGoal = goal;
@@ -240,7 +240,7 @@ public class GoalManager : MonoBehaviour
     /// Tells the Goal Manager to wait for a specific number of seconds before completing
     /// the goal and showing the next card.
     /// </summary>
-    /// <param name="seconds">The number of seconds to wait before showing the card.</param>
+    /// <param Value="seconds">The number of seconds to wait before showing the card.</param>
     /// <returns>Returns an IEnumerator for the current coroutine running.</returns>
     public IEnumerator WaitUntilNextCard(float seconds)
     {

@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             newFruit.GetComponent<ThrowFruit>()._maxXThreshold = maxXSlider.value;
             newFruit.GetComponent<ThrowFruit>()._minYThreshold = minYSlider.value;
 
-            //newFruit.GetComponent<ThrowFruit>().gameManager = this;
+            //newFruit.GetComponent<ThrowFruit>().scoreManager = this;
         });
 
         maxXSlider.value = newFruit.GetComponent<ThrowFruit>()._maxXThreshold;

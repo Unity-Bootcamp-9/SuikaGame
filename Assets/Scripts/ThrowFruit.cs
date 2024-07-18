@@ -10,14 +10,14 @@ public class ThrowFruit : MonoBehaviour
     [Range(0f, 1f)]
     public float _maxXThreshold;
 
-    //public GameManager gameManager;
+    //public GameManager scoreManager;
 
     private Rigidbody _rigidbody;
 
     [SerializeField]
     private float launchAngle = 45f;
 
-    // TODO : UI¿¡ Speed Á¶Àý¿ë Slider ÇÊ¿ä.
+    // TODO : UIï¿½ï¿½ Speed ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Slider ï¿½Ê¿ï¿½.
     public float speed = 4f;
 
     private void Awake()
@@ -37,25 +37,24 @@ public class ThrowFruit : MonoBehaviour
 
     private void Throw(object sender, SwipeData args)
     {
-        // ½º¿ÍÀÌÇÁ ÁÂ¿ìÁ¦ÇÑÀº Screen ±âÁØÀ¸·Î Á¦ÇÑ //
-        Debug.Log("Swipe Detected!");
-        //gameManager.checkDropText.text = $"y: {args.ScreenDirection.y >= _minYThreshold} x: {Mathf.Abs(args.ScreenDirection.x) <= _maxXThreshold}";
-        //gameManager.direction.text = $"{args.ScreenDirection} / ABS x: {Mathf.Abs(args.ScreenDirection.x)}";
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Screen ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ //
+        //scoreManager.checkDropText.text = $"y: {args.ScreenDirection.y >= _minYThreshold} x: {Mathf.Abs(args.ScreenDirection.x) <= _maxXThreshold}";
+        //scoreManager.direction.text = $"{args.ScreenDirection} / ABS x: {Mathf.Abs(args.ScreenDirection.x)}";
         if (args.ScreenDirection.y < _minYThreshold || Mathf.Abs(args.ScreenDirection.x) > _maxXThreshold)
         {
             return;
         }
 
-        // ÅõÃ´°Å¸® °è»êÀº World±âÁØÀ¸·Î °è»ê //
+        // ï¿½ï¿½Ã´ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Worldï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ //
         float force = args.Distance / args.Duration;
 
-        // °¢µµ¸¦ ¶óµð¾ÈÀ¸·Î º¯È¯
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         float angleInRadians = launchAngle * Mathf.Deg2Rad;
 
-        // xz Æò¸é¿¡¼­ÀÇ ¼Óµµ
+        // xz ï¿½ï¿½é¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
         float horizontalSpeed = Mathf.Cos(angleInRadians);
 
-        // y ¹æÇâ ¼Óµµ
+        // y ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
         float verticalSpeed = Mathf.Sin(angleInRadians);
 
         Vector3 launchVelocity = Camera.main.transform.forward + horizontalSpeed * verticalSpeed * Camera.main.transform.up;
@@ -65,7 +64,7 @@ public class ThrowFruit : MonoBehaviour
 
         gameObject.transform.SetParent(transform.root);
 
-        // ÇÑ ¹ø¸¸ Throw µÇµµ·Ï ÀÌº¥Æ® ±¸µ¶ ÇØÁ¦
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Throw ï¿½Çµï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _swipeEventAsset.eventRaised -= Throw;
     }
 }

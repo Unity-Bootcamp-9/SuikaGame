@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FruitsData
 {
-    public string name;
-    public int level;
-    public string path;
+    public string name { get; set; }
+    public int level { get; set; }
+    public string path { get; set; }
 }

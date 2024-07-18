@@ -22,7 +22,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// <summary>
     /// Serializable base class for an Observer pattern implementation that can be composed via the Inspector.
     /// </summary>
-    /// <typeparam name="T">The event argument type.</typeparam>
+    /// <typeparam Value="T">The event argument type.</typeparam>
     public abstract class EventAsset<T> : ScriptableObject
     {
         /// <summary>
@@ -33,7 +33,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// <summary>
         /// Raises the event.
         /// </summary>
-        /// <param name="arg">The event argument.</param>
+        /// <param Value="arg">The event argument.</param>
         public void Raise(T arg)
         {
             eventRaised?.Invoke(this, arg);
