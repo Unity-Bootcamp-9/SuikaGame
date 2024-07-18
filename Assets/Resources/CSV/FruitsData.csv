@@ -1,4 +1,4 @@
-name,level,Path
-Blueberry,1,Prefabs/Blueberry
-Strawberry,2,Prefabs/Strawberry
-Durian,3,Prefabs/Durian
+level,name,path
+1,Blueberry,Prefabs/Blueberry
+2,Strawberry,Prefabs/Strawberry
+3,Durian,Prefabs/Durian

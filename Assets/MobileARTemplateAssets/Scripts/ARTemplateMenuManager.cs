@@ -288,7 +288,7 @@ public class ARTemplateMenuManager : MonoBehaviour
     /// Set the index of the object in the list on the ObjectSpawner to a specific value.
     /// This is effectively an override of the default behavior or randomly spawning an object.
     /// </summary>
-    /// <param name="objectIndex">The index in the array of the object to spawn with the ObjectSpawner</param>
+    /// <param Value="objectIndex">The index in the array of the object to spawn with the ObjectSpawner</param>
     public void SetObjectToSpawn(int objectIndex)
     {
         if (m_ObjectSpawner == null)

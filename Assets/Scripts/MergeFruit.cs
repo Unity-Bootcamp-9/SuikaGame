@@ -2,35 +2,33 @@ using UnityEngine;
 
 public class MergeFruit : MonoBehaviour
 {
-    public enum Type { Blueberry, Strawberry, Durian }
-    private Type fruitType;
-
-    private ScoreManager gameManager;
+    private FruitsData fruitData;
+    private ScoreManager scoreManager;
     private bool isMerged = false; // 과일이 이미 합쳐졌는지 여부
 
     void Start()
     {
-        gameManager = FindObjectOfType<ScoreManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!isMerged && collision.gameObject.CompareTag(tag)) // 플래그 확인
+        /*if (!isMerged && collision.gameObject.CompareTag(tag)) // 플래그 확인
         {
             MergeFruit otherFruit = collision.gameObject.GetComponent<MergeFruit>();
 
-            if (otherFruit != null && otherFruit.fruitType == fruitType && !otherFruit.isMerged)
+            if (otherFruit != null && otherFruit.fruitData == fruitData && !otherFruit.isMerged)
             {
                 // 과일 합치기 로직
                 MergeFruits(collision.gameObject);
-                gameManager.OnFruitMerged(fruitType);
+                scoreManager.OnFruitMerged(fruitData);
             }
-        }
+        }*/
     }
 
     private void MergeFruits(GameObject otherFruit)
     {
-        isMerged = true; // 현재 과일이 합쳐졌음을 표시
+        /*isMerged = true; // 현재 과일이 합쳐졌음을 표시
         MergeFruit otherFruitScript = otherFruit.GetComponent<MergeFruit>();
         if (otherFruitScript != null)
         {
@@ -55,24 +53,11 @@ public class MergeFruit : MonoBehaviour
                 break;
         }
 
-        InstantiateFruit(newFruitType, mergePosition);
+        InstantiateFruit(newFruitType, mergePosition);*/
     }
 
-    private GameObject InstantiateFruit(Type newFruitType, Vector3 position)
+    /*private GameObject InstantiateFruit(FruitsData nextFruit, Vector3 position)
     {
-        GameObject fruitPrefab = null;
-        switch (newFruitType)
-        {
-            case Type.Blueberry:
-                fruitPrefab = Resources.Load<GameObject>("Prefabs/Blueberry");
-                break;
-            case Type.Strawberry:
-                fruitPrefab = Resources.Load<GameObject>("Prefabs/Strawberry");
-                break;
-            case Type.Durian:
-                fruitPrefab = Resources.Load<GameObject>("Prefabs/Durian");
-                break;
-        }
-        return Instantiate(fruitPrefab, position, Quaternion.identity);
-    }
+        for ()
+    }*/
 }

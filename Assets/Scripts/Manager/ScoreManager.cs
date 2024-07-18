@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void OnFruitMerged(MergeFruit.Type fruitType)
+    /*public void OnFruitMerged(MergeFruit.Type fruitType)
     {
         UpdateCombo();
         UpdateScore(fruitType);
@@ -89,7 +89,7 @@ public class ScoreManager : MonoBehaviour
                 break;
         }
         score += Mathf.CeilToInt(points * scoreMultiplier); // CeilToInt ¿Ã¸²
-    }
+    }*/
 
     private void ResetCombo()
     {
