@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] Text scoreText;
-    [SerializeField] Text scorePlusText;
-    [SerializeField] Text comboText;
-    [SerializeField] Text comboMultiText;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scorePlusText;
+    [SerializeField] TextMeshProUGUI comboText;
+    [SerializeField] TextMeshProUGUI comboMultiText;
     [SerializeField] GameObject board;
 
     private int comboCount = 1;

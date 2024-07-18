@@ -3,7 +3,7 @@ using UnityEngine;
 public class MergeFruit : MonoBehaviour
 {
     public enum Type { Blueberry, Strawberry, Durian }
-    public Type fruitType;
+    private Type fruitType;
 
     private ScoreManager gameManager;
     private bool isMerged = false; // 과일이 이미 합쳐졌는지 여부
