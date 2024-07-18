@@ -38,6 +38,7 @@ public class ThrowFruit : MonoBehaviour
     private void Throw(object sender, SwipeData args)
     {
         // 스와이프 좌우제한은 Screen 기준으로 제한 //
+        Debug.Log("Swipe Detected!");
         //gameManager.checkDropText.text = $"y: {args.ScreenDirection.y >= _minYThreshold} x: {Mathf.Abs(args.ScreenDirection.x) <= _maxXThreshold}";
         //gameManager.direction.text = $"{args.ScreenDirection} / ABS x: {Mathf.Abs(args.ScreenDirection.x)}";
         if (args.ScreenDirection.y < _minYThreshold || Mathf.Abs(args.ScreenDirection.x) > _maxXThreshold)
