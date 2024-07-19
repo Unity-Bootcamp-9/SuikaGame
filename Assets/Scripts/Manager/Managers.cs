@@ -10,7 +10,7 @@ public class Managers : MonoBehaviour
 
     private static DataManager dataManager = new();
     private static UIManager uiManager = new();
-    private static ResourceManager resourceManager = new ResourceManager();
+    private static ResourceManager resourceManager = new();
 
     public static DataManager Data { get { Init(); return dataManager; } }
     public static UIManager UI { get { Init(); return uiManager; } }

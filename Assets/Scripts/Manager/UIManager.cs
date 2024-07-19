@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class UIManager
 {
+    // 정렬 순서
     int _order = -20;
 
     Stack<UIPopup> _popupStack = new Stack<UIPopup>();
