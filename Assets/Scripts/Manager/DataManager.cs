@@ -7,16 +7,9 @@ using System.Linq;
 using CsvHelper;
 using UnityEngine;
 
-public class FruitsData
-{
-    public int level { get; set; }
-    public string name { get; set; }
-    public string path { get; set; }
-}
-
 public class DataManager
 {
-    public List<GameObject> fruits { get; private set; }
+    public List<FruitsData> fruits { get; private set; }
     // NOTE : 데이터테이블 추가해야함.
     // NOTE : 느슨한 식별자의 경우 List를, 엄격한 식별자의 경우 Dictionary 사용.
     // NOTE : Id를 열거형으로 만들어두면 오류낼 일이 적음
@@ -25,10 +18,9 @@ public class DataManager
 
     public void Init()
     {
-        var fruitsData = ParseToList<FruitsData>("FruitsData");
-        fruits = new List<GameObject>();
+        fruits = ParseToList<FruitsData>("FruitsData");
 
-        foreach (var fruits in fruitsData)
+        foreach (FruitsData fruits in fruits)
         {
             Debug.Log(fruits.name);
         }
