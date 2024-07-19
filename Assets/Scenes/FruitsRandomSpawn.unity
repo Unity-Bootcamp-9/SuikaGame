@@ -893,9 +893,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Combo
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d1728ba5990034831bbe01f3a2578b70, type: 2}
-  m_sharedMaterial: {fileID: 4687939059374929122, guid: d1728ba5990034831bbe01f3a2578b70,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1844,21 +1843,21 @@ MonoBehaviour:
   m_EnableXRInput: 1
   m_EnableMouseInput: 1
   m_EnableTouchInput: 1
-  m_PointAction: {fileID: 2869410428622933342, guid: c348712bda248c246b8c49b3db54643f,
+  m_PointAction: {fileID: 2869410428622933342, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_LeftClickAction: {fileID: 1855836014308820768, guid: c348712bda248c246b8c49b3db54643f,
+  m_LeftClickAction: {fileID: 1855836014308820768, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_MiddleClickAction: {fileID: -6289560987278519447, guid: c348712bda248c246b8c49b3db54643f,
+  m_MiddleClickAction: {fileID: -6289560987278519447, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_RightClickAction: {fileID: -2562941478296515153, guid: c348712bda248c246b8c49b3db54643f,
+  m_RightClickAction: {fileID: -2562941478296515153, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_ScrollWheelAction: {fileID: 5825226938762934180, guid: c348712bda248c246b8c49b3db54643f,
+  m_ScrollWheelAction: {fileID: 5825226938762934180, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_NavigateAction: {fileID: -7967456002180160679, guid: c348712bda248c246b8c49b3db54643f,
+  m_NavigateAction: {fileID: -7967456002180160679, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_SubmitAction: {fileID: 3994978066732806534, guid: c348712bda248c246b8c49b3db54643f,
+  m_SubmitAction: {fileID: 3994978066732806534, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_CancelAction: {fileID: 2387711382375263438, guid: c348712bda248c246b8c49b3db54643f,
+  m_CancelAction: {fileID: 2387711382375263438, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
   m_EnableBuiltinActionsAsFallback: 1
   m_EnableGamepadInput: 1
@@ -1983,6 +1982,8 @@ GameObject:
   - component: {fileID: 1363917534}
   - component: {fileID: 1363917533}
   - component: {fileID: 1363917532}
+  - component: {fileID: 1363917536}
+  - component: {fileID: 1363917535}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -2003,7 +2004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActionAssets:
-  - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - {fileID: -944628639613478452, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9, type: 3}
 --- !u!114 &1363917533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2037,6 +2038,37 @@ Transform:
   - {fileID: 56939678}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363917535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363917531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ea7b179d6d2394ba24786115d55640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swipeInputActionReference: {fileID: 11400000, guid: f27bb52ead4031f49a470a06714b64f3,
+    type: 2}
+--- !u!114 &1363917536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363917531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2589663cfb431c94caa43a87affd83e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swipeEventAsset: {fileID: 11400000, guid: 1e25d16e4f02c33428de76573b897bc1, type: 2}
+  minimumDistance: 0.02
+  maximumTime: 1
+  StartScreenPosition: {x: 0, y: 0, z: 0}
+  EndScreenPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1392180896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2205,7 @@ MonoBehaviour:
   - {fileID: 8865683209106129632, guid: ebb256d214ded2440b632d191aa12dcd, type: 3}
   - {fileID: 4579333357478458746, guid: c4a85d158b138e743948dc9020dc355b, type: 3}
   - {fileID: 8009446025789454803, guid: 8a6e708e1d733e5409a06826f3090178, type: 3}
+  _swipeEventAsset: {fileID: 11400000, guid: 1e25d16e4f02c33428de76573b897bc1, type: 2}
 --- !u!1 &1736175447
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,6 +3741,7 @@ GameObject:
   - component: {fileID: 2304840587442373461}
   - component: {fileID: 6459067057762433939}
   - component: {fileID: 8353244498741104495}
+  - component: {fileID: 8353244498741104496}
   m_Layer: 0
   m_Name: Blueberry
   m_TagString: Untagged
@@ -3776,6 +3810,23 @@ CapsuleCollider:
   m_Height: 0.001
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8353244498741104496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822673454841516640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb33a132defa948489493a8b1212f304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swipeEventAsset: {fileID: 11400000, guid: 1e25d16e4f02c33428de76573b897bc1, type: 2}
+  _minYThreshold: 0.9
+  _maxXThreshold: 0.3
+  launchAngle: 55
+  speed: 8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

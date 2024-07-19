@@ -1,62 +1,61 @@
-using CsvHelper;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using CsvHelper;
 using UnityEngine;
+
+public class FruitsData
+{
+    public int level { get; set; }
+    public string name { get; set; }
+    public string path { get; set; }
+}
 
 public class DataManager
 {
-    public List<FruitsData> FruitsData { get; private set; }
+    public List<GameObject> fruits { get; private set; }
+    // NOTE : 데이터테이블 추가해야함.
+    // NOTE : 느슨한 식별자의 경우 List를, 엄격한 식별자의 경우 Dictionary 사용.
+    // NOTE : Id를 열거형으로 만들어두면 오류낼 일이 적음
+    //private Dictionary<int, TestData> _testDataTable;
+    //private List<TestData2> _testData2Table;
 
     public void Init()
     {
-        FruitsData = LoadCsv<FruitsData>("FruitsData");
-    }
+        var fruitsData = ParseToList<FruitsData>("FruitsData");
+        fruits = new List<GameObject>();
 
-    private List<T> LoadCsv<T>(string filename)
-    {
-        using (var reader = new StringReader(Resources.Load<TextAsset>($"CSV/{filename}").text))
-        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        foreach (var fruits in fruitsData)
         {
-
-            var records = csv.GetRecords<T>().ToList();
-            return records;
+            Debug.Log(fruits.name);
         }
+
+        //_testDataTable = ParseToDict<int, TestData>("Da ta/TestData", data => data.Id);
+        //_testData2Table = ParseToList<TestData2>("Data/TestData2");
     }
 
-    private Dictionary<Key, T> LoadCsv<T, Key>(string filename, string indexKey) 
+    public List<T> ParseToList<T>([NotNull] string path)
     {
-        Dictionary<Key, T> result = new();
-        using (var reader = new StringReader(Resources.Load<TextAsset>($"CSV/{filename}").text))
-        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        using (var reader = new StringReader(Resources.Load<TextAsset>($"CSV/{path}").text))
         {
-            var records = csv.GetRecords<T>().ToList();
-            
-            foreach (var record in records)
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                var keyProperty = typeof(T).GetProperty(indexKey);
-                if (keyProperty == null)
-                {
-                    continue;
-                }
-
-                var key = (Key)keyProperty.GetValue(record);
-                var value = record;
-
-                if (!result.ContainsKey(key))
-                {
-                    result.Add(key, value);
-                }
-                else
-                {
-                    Debug.Log("없음");
-                }
+                return csv.GetRecords<T>().ToList();
             }
         }
+    }
 
-        return result;
+    public Dictionary<Key, Item> ParseToDict<Key, Item>([NotNull] string path, Func<Item, Key> keySelector)
+    {
+        using (var reader = new StringReader(Resources.Load<TextAsset>($"CSV/{path}").text))
+        {
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                return csv.GetRecords<Item>().ToDictionary(keySelector);
+            }
+        }
     }
 }
