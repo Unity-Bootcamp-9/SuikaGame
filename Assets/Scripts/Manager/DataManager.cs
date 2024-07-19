@@ -7,16 +7,13 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+public class DataManager
 {
-    private void Start()
-    {
-        Init();
-    }
+    public List<FruitsData> FruitsData { get; private set; }
 
     public void Init()
     {
-        var data = LoadCsv<FruitsData>("FruitsData");
+        FruitsData = LoadCsv<FruitsData>("FruitsData");
     }
 
     private List<T> LoadCsv<T>(string filename)
@@ -26,7 +23,6 @@ public class DataManager : MonoBehaviour
         {
 
             var records = csv.GetRecords<T>().ToList();
-            Debug.Log(records.Count);
             return records;
         }
     }
