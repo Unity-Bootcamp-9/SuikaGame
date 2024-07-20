@@ -4,8 +4,9 @@ public class UIConfirmDialog : UIPopup
 {
     enum Texts
     {
-        DialogTitle,
-        DialogBody
+        TitleText,
+        BodyText,
+        ConfirmText
     }
 
     enum Buttons
@@ -15,6 +16,7 @@ public class UIConfirmDialog : UIPopup
 
     string _title;
     string _body;
+    string _confirm;
 
     public override bool Init()
     {
@@ -26,14 +28,19 @@ public class UIConfirmDialog : UIPopup
 
         GetButton((int)Buttons.Confirm).gameObject.BindEvent(OnClickYesButton);
 
+        GetText((int)Texts.TitleText).text = _title;
+        GetText((int)Texts.BodyText).text = _body;
+        GetText((int)Texts.ConfirmText).text = _confirm;
+
         return true;
     }
 
-    public void SetDialog(Action onClickYesButton, string title, string body)
+    public void SetDialog(Action onClickYesButton, string title, string body, string confirm)
     {
         _onClickYesButton = onClickYesButton;
         _title = title;
         _body = body;
+        _confirm = confirm;
     }
 
     Action _onClickYesButton;
