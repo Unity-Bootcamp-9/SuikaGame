@@ -10,7 +10,7 @@ public class InGameScene : BaseScene
             return false;
 
         SceneType = Define.Scene.Game;
-        Managers.UI.ShowPopupUI<UIInGame>();
+        Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(() => { Managers.UI.ShowPopupUI<UISetPlatePosition>(); }, "Info", "Please detect the floor to start game", "Enter");
         Debug.Log("Init");
 
         return true;

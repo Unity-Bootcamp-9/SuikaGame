@@ -12,7 +12,7 @@ public class UIInGame : UIPopup
 
     // ¹öÆ°
     enum Buttons 
-    { 
+    {
     }
 
     public override bool Init()
@@ -21,5 +21,10 @@ public class UIInGame : UIPopup
             return false;
 
         return true;
+    }
+
+    private void ButtonTest()
+    {
+        Debug.Log("click");
     }
 }
