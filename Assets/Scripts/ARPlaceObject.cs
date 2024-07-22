@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 
 public class ARPlaceObject : MonoBehaviour
@@ -32,7 +34,6 @@ public class ARPlaceObject : MonoBehaviour
 
     void PlaceObjectAt(object sender, ARRaycastHit hitPose)
     {
-        Debug.Log("placeable");
         if (installable == false)
         {
             return;

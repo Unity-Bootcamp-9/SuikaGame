@@ -2278,7 +2278,7 @@
                 {
                     "name": "",
                     "id": "8da26dff-81a4-4375-9ac5-597040944035",
-                    "path": "<Touchscreen>/Press",
+                    "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -2289,7 +2289,7 @@
                 {
                     "name": "",
                     "id": "ea58c28a-e9cf-46d4-a604-80dac6ee8d2b",
-                    "path": "<Touchscreen>/position",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

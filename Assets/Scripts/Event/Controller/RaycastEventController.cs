@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -92,6 +93,16 @@ public class RaycastEventController : MonoBehaviour
 
         var tapPosition = pointer.position.ReadValue();
 
+        // UI 위로 터치가 감지됐을 경우 Raycast 무시 처리
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(tapPosition.x, tapPosition.y);
+        List<RaycastResult> results = new();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        if (results.Count > 0)
+            return;
+
+        // detect raycast
         if (m_ARRaycastHitEvent != null &&
             m_RaycastManager.Raycast(tapPosition, s_Hits, m_TrackableType))
         {

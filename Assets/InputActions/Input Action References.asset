@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b808cb25ab0591c459248ae7e4e040dd, type: 3}
-  m_Name: New Input Action References
+  m_Name: Input Action References
   m_EditorClassIdentifier: 
   m_ScreenTap:
     m_UseReference: 1
