@@ -43,6 +43,11 @@ public class UIInGame : UIPopup
         return true;
     }
 
+    private void OnDisable()
+    {
+        fruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
+    }
+
     private void UpdateNextFruitImage(string fruitName)
     {
         // 이미지 업데이트
