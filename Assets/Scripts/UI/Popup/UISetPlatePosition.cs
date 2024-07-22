@@ -8,6 +8,8 @@ public class UISetPlatePosition : UIPopup
 
     private ARPlaceObject _arPlaceObject;
 
+    private bool _isDialogShowing;
+
     enum Texts
     {
     }
@@ -36,7 +38,11 @@ public class UISetPlatePosition : UIPopup
         // 월드상으로 설치된 접시가 없을 경우 다이얼로그 출력 후 그 이후의 로직 생략
         if (_arPlaceObject.GetSpawnedGameObject() == null)
         {
-            Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(() => { }, "Info", "Please add a bowl in world with touch.", "Confirm");
+            if (_isDialogShowing == false)
+            {
+                _isDialogShowing = true;
+                Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(() => { _isDialogShowing = false; }, "Info", "Please add a bowl in world with touch.", "Confirm");
+            }
             return;
         }
 
