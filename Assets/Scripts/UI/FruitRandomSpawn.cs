@@ -1,10 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FruitRandomSpawn : MonoBehaviour
+public class FruitRandomSpawnManager : MonoBehaviour
 {
     [SerializeField]
     private SwipeEventAsset _swipeEventAsset;
@@ -15,8 +14,9 @@ public class FruitRandomSpawn : MonoBehaviour
     private Stack<int> randomIndex = new Stack<int>();
     private GameObject currentFruit;
     private GameObject nextFruit;
-    private GameObject nextFruitImageObject;  // NextFruit 이미지를 표시할 오브젝트
-    private Image nextFruitImage;
+
+    public delegate void OnChangeRandom(string fruitName);
+    public event OnChangeRandom OnChangeRandomEvent;
 
     private bool isSwipe = false;
 
@@ -38,8 +38,8 @@ public class FruitRandomSpawn : MonoBehaviour
     void MakeRandomIndex()
     {
         randomIndex.Clear();
-        randomIndex.Push(Random.Range(0, Managers.Data.fruits.Count));
-        randomIndex.Push(Random.Range(0, Managers.Data.fruits.Count));
+        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Count));
+        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Count));
     }
 
     void SpawnFruits()
@@ -69,38 +69,10 @@ public class FruitRandomSpawn : MonoBehaviour
         }
 
         // 새로운 랜덤 인덱스 추가
-        randomIndex.Push(Random.Range(0, Managers.Data.fruits.Count));
+        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Count));
 
         // 다음 과일 이미지 업데이트
-        SetNextFruitImage(Managers.Data.fruits[randomIndex.Peek()].name);
-    }
-
-    void SetNextFruitImage(string fruitName)
-    {
-        // 기존 이미지가 없으면 생성
-        if (nextFruitImage == null)
-        {
-            nextFruitImageObject = new GameObject("NextFruitImage");
-            nextFruitImageObject.transform.SetParent(nextFruitsPosition, false);
-
-            // RectTransform 및 Image 컴포넌트 추가
-            RectTransform rectTransform = nextFruitImageObject.AddComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(100, 100); // 이미지 크기 설정
-            rectTransform.localPosition = new Vector3(10, -5, 0); // 위치 초기화
-
-            nextFruitImage = nextFruitImageObject.AddComponent<Image>();
-        }
-
-        // 이미지 업데이트
-        Sprite sprite = Resources.Load<Sprite>($"Images/Fruits/{fruitName}");
-        if (sprite != null)
-        {
-            nextFruitImage.sprite = sprite;
-        }
-        else
-        {
-            Debug.LogError($"스프라이트 없음: Images/Fruits/{fruitName}");
-        }
+        OnChangeRandomEvent?.Invoke(Managers.Data.fruits[randomIndex.Peek()].name);
     }
 
     GameObject InstantiateFruit(FruitsData fruitsData, Vector3 position)
