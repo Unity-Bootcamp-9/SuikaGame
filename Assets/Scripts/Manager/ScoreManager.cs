@@ -10,7 +10,7 @@ public class ScoreManager
     private float comboTimer = 0f;
     private float comboDuration = 3f;
     private float comboMulti = 1.1f;
-    private float score = 0;
+    public float score = 0;
 
     private Coroutine comboCoroutine;
 
