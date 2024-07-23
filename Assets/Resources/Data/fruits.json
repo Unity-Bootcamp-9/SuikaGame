@@ -1,0 +1,19 @@
+{
+  "fruits": [
+    {
+      "name": "Blueberry",
+      "level": 1,
+      "path": "Prefabs/Blueberry"
+    },
+    {
+      "name": "Strawberry",
+      "level": 2,
+      "path": "Prefabs/Strawberry"
+    },
+    {
+      "name": "Durian",
+      "level": 3,
+      "path": "Prefabs/Durian"
+    }
+  ]
+}

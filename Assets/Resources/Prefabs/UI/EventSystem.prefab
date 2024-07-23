@@ -82,7 +82,7 @@ MonoBehaviour:
     type: 3}
   m_ScrollWheelAction: {fileID: 5825226938762934180, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
-  m_NavigateAction: {fileID: -6289560987278519447, guid: c348712bda248c246b8c49b3db54643f,
+  m_NavigateAction: {fileID: -7967456002180160679, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
   m_SubmitAction: {fileID: 3994978066732806534, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9,
     type: 3}
