@@ -1,68 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI scorePlusText;
-    [SerializeField] TextMeshProUGUI comboText;
-    [SerializeField] TextMeshProUGUI comboMultiText;
-    [SerializeField] GameObject board;
-
     private int comboCount = 1;
     private float comboTimer = 0f;
     private float comboDuration = 3f;
     private float scoreMultiplier = 1.1f;
     private float score = 0;
 
-    void Update()
-    {
-        if (comboText != null)
-        {
-            comboMultiText.text = "+" + scoreMultiplier.ToString();
-            comboText.text = comboCount.ToString() + " 연쇄";
-        }
+    public event Action<float, float> OnScoreUpdated;
+    public event Action<int, float> OnComboUpdated;
 
-        if (scoreText != null)
-        {
-            scorePlusText.text = "+" + score;
-            scoreText.text = "점수 " + score.ToString();
-        }
-
-        if (comboCount > 0)
-        {
-            comboTimer -= Time.deltaTime;
-            if (comboTimer <= 0)
-            {
-                ResetCombo();
-            }
-        }
-    }
-
-    /*public void OnFruitMerged(MergeFruit.Type fruitType)
+    public void OnFruitMerged(FruitsData fruitData)
     {
         UpdateCombo();
-        UpdateScore(fruitType);
+        UpdateScore(fruitData);
     }
 
     private void UpdateCombo()
     {
         if (comboTimer > 0)
         {
-            comboMultiText.gameObject.SetActive(true);
-            comboText.gameObject.SetActive(true);
             comboCount++;
 
-            if (comboCount % 2 == 0) // 2번 증가할 때마다 0.1 배씩 증가
+            if (comboCount % 2 == 0)
             {
-                Debug.Log(comboCount);
                 scoreMultiplier += 0.1f;
             }
-
-            Debug.Log($"{comboCount} 콤보");
         }
         else
         {
@@ -70,33 +36,26 @@ public class ScoreManager : MonoBehaviour
             scoreMultiplier = 1.1f;
         }
         comboTimer = comboDuration;
+
+        OnComboUpdated?.Invoke(comboCount, scoreMultiplier);
     }
 
-    private void UpdateScore(MergeFruit.Type fruitType)
+    private void UpdateScore(FruitsData fruitData)
     {
-        scorePlusText.gameObject.SetActive(true);
-        int points = 0;
-        switch (fruitType)
-        {
-            case MergeFruit.Type.Blueberry:
-                points = 1;
-                break;
-            case MergeFruit.Type.Strawberry:
-                points = 2;
-                break;
-            case MergeFruit.Type.Durian:
-                points = 3;
-                break;
-        }
-        score += Mathf.CeilToInt(points * scoreMultiplier); // CeilToInt 올림
-    }*/
+        int points = fruitData.level; // level을 점수로 사용
+        float scorePlus = Mathf.CeilToInt(points * scoreMultiplier);
+        score += scorePlus;
 
-    private void ResetCombo()
+        OnScoreUpdated?.Invoke(score, scorePlus);
+    }
+
+    public void ResetCombo()
     {
         comboCount = 0;
         scoreMultiplier = 1.1f;
         comboTimer = 0f;
 
-        board.SetActive(false);
+        //if ( 리셋 여부 확인)
+        OnComboUpdated?.Invoke(comboCount, scoreMultiplier);
     }
 }

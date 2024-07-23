@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 4446049217596252211}
   - component: {fileID: 8434911572118705856}
   - component: {fileID: 4115115948659702789}
+  - component: {fileID: -1222120264722424216}
   m_Layer: 0
   m_Name: Durian
-  m_TagString: Untagged
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 200, y: 200, z: 200}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -177,3 +178,15 @@ MonoBehaviour:
   _maxXThreshold: 0.835
   launchAngle: 55
   speed: 8
+--- !u!114 &-1222120264722424216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4579333357478458746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368c3aa0b6690f244884e907f7ee6c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

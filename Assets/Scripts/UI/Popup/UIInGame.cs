@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIInGame : UIPopup
 {
@@ -9,10 +10,14 @@ public class UIInGame : UIPopup
     // 텍스트
     enum Texts
     {
+        ScoreText,
+        ScorePlusText,
+        ComboText,
+        ComboMultiText
     }
 
     // 버튼
-    enum Buttons 
+    enum Buttons
     {
     }
 
@@ -21,10 +26,8 @@ public class UIInGame : UIPopup
         NextFruitImage
     }
 
-    // TODO: Managers에서 전역으로 관리하도록 처리
     private FruitRandomSpawnManager fruitRandomSpawnManager;
-
-    private Image nextFruitImage;
+    private ScoreManager scoreManager;
 
     public override bool Init()
     {
@@ -32,12 +35,24 @@ public class UIInGame : UIPopup
             return false;
 
         BindImage(typeof(Images));
-        fruitRandomSpawnManager = GetComponent<FruitRandomSpawnManager>();
+        BindText(typeof(Texts));
 
-        nextFruitImage = GetImage((int)Images.NextFruitImage);
-        if (fruitRandomSpawnManager != null ) 
+        fruitRandomSpawnManager = FindObjectOfType<FruitRandomSpawnManager>();
+
+        GetText((int)Texts.ScoreText);
+        GetText((int)Texts.ScorePlusText);
+        GetText((int)Texts.ComboText);
+        GetText((int)Texts.ComboMultiText);
+
+        if (fruitRandomSpawnManager != null)
         {
             fruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
+        }
+
+        if (scoreManager != null)
+        {
+            scoreManager.OnScoreUpdated += UpdateScoreUI;
+            scoreManager.OnComboUpdated += UpdateComboUI;
         }
 
         return true;
@@ -45,7 +60,16 @@ public class UIInGame : UIPopup
 
     private void OnDisable()
     {
-        fruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
+        if (fruitRandomSpawnManager != null)
+        {
+            fruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
+        }
+
+        if (scoreManager != null)
+        {
+            scoreManager.OnScoreUpdated -= UpdateScoreUI;
+            scoreManager.OnComboUpdated -= UpdateComboUI;
+        }
     }
 
     private void UpdateNextFruitImage(string fruitName)
@@ -54,11 +78,50 @@ public class UIInGame : UIPopup
         Sprite sprite = Resources.Load<Sprite>($"Images/Fruits/{fruitName}");
         if (sprite != null)
         {
-            nextFruitImage.sprite = sprite;
+            GetImage((int)Images.NextFruitImage).sprite = sprite;
         }
         else
         {
             Debug.Log($"스프라이트 없음 : Images/Fruits/{fruitName}");
         }
     }
-}
+
+    private void UpdateScoreUI(float score, float scorePlus)
+    {
+        if (GetText((int)Texts.ScoreText) != null)
+        {
+            GetText((int)Texts.ScoreText).text = $"점수: {score}";
+        }
+
+        if (GetText((int)Texts.ScorePlusText) != null)
+        {
+            GetText((int)Texts.ScorePlusText).text = $"+{scorePlus}";
+        }
+    }
+
+    private void UpdateComboUI(int comboCount, float scoreMultiplier)
+    {
+        if (GetText((int)Texts.ComboText) != null)
+        {
+            GetText((int)Texts.ComboText).text = $"{comboCount} 연쇄";
+        }
+
+        if (GetText((int)Texts.ComboMultiText) != null)
+        {
+            GetText((int)Texts.ComboMultiText).text = $"+{scoreMultiplier}";
+        }
+
+        // 콤보타이머 시작
+        // 코루틴으로 구현
+        // if (코루틴 중복 실행 방지 예외 처리)
+        {
+            StartCoroutine(ResetComboCoroutine());
+        }
+        Managers.ScoreManager.ResetCombo();
+    }
+
+    private IEnumerator ResetComboCoroutine()
+    {
+        yield return new WaitForSeconds(3f);
+    }
+}   

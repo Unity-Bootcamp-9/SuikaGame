@@ -12,15 +12,19 @@ public class Managers : MonoBehaviour
     private static UIManager uiManager = new();
     private static ResourceManager resourceManager = new();
     private static FruitRandomSpawnManager fruitRandomSpawnManager = new();
+    private static ScoreManager scoreManager = new();
+    private static FruitsManager fruitsManager = new();
 
     public static DataManager Data { get { Init(); return dataManager; } }
     public static UIManager UI { get { Init(); return uiManager; } }
     public static ResourceManager Resource { get { Init(); return resourceManager; } }
-    public static FruitRandomSpawnManager FruitRandomSpawnManager { get {  Init(); return fruitRandomSpawnManager; } }
+    public static FruitRandomSpawnManager FruitRandomSpawnManager { get { Init(); return fruitRandomSpawnManager; } }
+    public static ScoreManager ScoreManager { get { Init();return scoreManager; } }
+    public static FruitsManager FruitsManager { get { Init();return fruitsManager; } }
 
     void Start()
     {
-        Init();    
+        Init();
     }
 
     private static void Init()

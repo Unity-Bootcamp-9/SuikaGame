@@ -1,63 +1,50 @@
+using System.Data.Common;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MergeFruit : MonoBehaviour
 {
-    private FruitsData fruitData;
-    private ScoreManager scoreManager;
-    private bool isMerged = false; // 과일이 이미 합쳐졌는지 여부
-
-    void Start()
-    {
-        scoreManager = FindObjectOfType<ScoreManager>();
-    }
+    public FruitsData fruitData;
+    private bool isMerged = false;
 
     void OnCollisionEnter(Collision collision)
     {
-        /*if (!isMerged && collision.gameObject.CompareTag(tag)) // 플래그 확인
+        if (!isMerged && collision.gameObject.CompareTag("Fruit"))
         {
             MergeFruit otherFruit = collision.gameObject.GetComponent<MergeFruit>();
 
-            if (otherFruit != null && otherFruit.fruitData == fruitData && !otherFruit.isMerged)
+            if (otherFruit != null && otherFruit.fruitData.level == fruitData.level && !otherFruit.isMerged)
             {
-                // 과일 합치기 로직
                 MergeFruits(collision.gameObject);
-                scoreManager.OnFruitMerged(fruitData);
+                Managers.ScoreManager.OnFruitMerged(fruitData);
             }
-        }*/
+        }
     }
 
     private void MergeFruits(GameObject otherFruit)
     {
-        /*isMerged = true; // 현재 과일이 합쳐졌음을 표시
+        isMerged = true;
         MergeFruit otherFruitScript = otherFruit.GetComponent<MergeFruit>();
         if (otherFruitScript != null)
         {
             otherFruitScript.isMerged = true; // 다른 과일도 합쳐졌음을 표시
         }
+        Debug.Log(fruitData.level);
 
-        Debug.Log($"과일 합쳐짐: {fruitType}");
-
-        Vector3 mergePosition = transform.position; // 합쳐질 위치
+        
+        Vector3 mergePosition = gameObject.transform.position; // 합쳐질 위치
         Destroy(otherFruit);
         Destroy(gameObject);
 
-        Type newFruitType = Type.Blueberry; // 기본값
-
-        switch (fruitType)
+        if (Managers.Data.fruits.Count > fruitData.level)
         {
-            case Type.Blueberry:
-                newFruitType = Type.Strawberry;
-                break;
-            case Type.Strawberry:
-                newFruitType = Type.Durian;
-                break;
+            FruitsData newFruitData = Managers.Data.fruits[fruitData.level];
+
+            if (newFruitData != null)
+            {
+                Managers.FruitsManager.InstantiateFruit(newFruitData, mergePosition, true);
+            }
         }
 
-        InstantiateFruit(newFruitType, mergePosition);*/
     }
-
-    /*private GameObject InstantiateFruit(FruitsData nextFruit, Vector3 position)
-    {
-        for ()
-    }*/
 }

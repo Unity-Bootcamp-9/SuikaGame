@@ -60,7 +60,7 @@ public class FruitRandomSpawnManager : MonoBehaviour
         }
 
         // 새로운 다음 과일 생성
-        nextFruit = InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], nextFruitsPosition.position);
+        nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], nextFruitsPosition.position);
         if (nextFruit != null)
         {
             nextFruit.transform.SetParent(Camera.main.transform, false); // MainCamera의 자식으로 설정
@@ -75,19 +75,13 @@ public class FruitRandomSpawnManager : MonoBehaviour
         OnChangeRandomEvent?.Invoke(Managers.Data.fruits[randomIndex.Peek()].name);
     }
 
-    GameObject InstantiateFruit(FruitsData fruitsData, Vector3 position)
+    // 모든 캡슐 콜라이더 활성화
+    private void EnableAllColliders(GameObject fruit)
     {
-        GameObject fruitPrefab = Resources.Load<GameObject>(fruitsData.path);
-        if (fruitPrefab != null)
+        CapsuleCollider[] colliders = fruit.GetComponentsInChildren<CapsuleCollider>();
+        foreach (CapsuleCollider collider in colliders)
         {
-            GameObject fruitInstance = Instantiate(fruitPrefab, position, Quaternion.identity);
-            fruitInstance.transform.localPosition = Vector3.zero; // 위치 초기화
-            return fruitInstance;
-        }
-        else
-        {
-            Debug.LogError($"프리팹 없음: {fruitsData.path}");
-            return null;
+            collider.enabled = true;
         }
     }
 
@@ -98,7 +92,7 @@ public class FruitRandomSpawnManager : MonoBehaviour
         {
             // 스와이프 이벤트 발생 시 과일 업데이트
             SpawnFruits();
-            currentFruit.GetComponent<CapsuleCollider>().enabled = true;
+            EnableAllColliders(currentFruit);
             isSwipe = true;
         }
     }

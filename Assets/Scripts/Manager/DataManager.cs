@@ -24,9 +24,6 @@ public class DataManager
         {
             Debug.Log(fruits.name);
         }
-
-        //_testDataTable = ParseToDict<int, TestData>("Da ta/TestData", data => data.Id);
-        //_testData2Table = ParseToList<TestData2>("Data/TestData2");
     }
 
     public List<T> ParseToList<T>([NotNull] string path)
