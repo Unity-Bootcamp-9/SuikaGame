@@ -29,14 +29,12 @@ public class MergeFruit : MonoBehaviour
         {
             otherFruitScript.isMerged = true; // 다른 과일도 합쳐졌음을 표시
         }
-        Debug.Log(fruitData.level);
 
-        
         Vector3 mergePosition = gameObject.transform.position; // 합쳐질 위치
         Destroy(otherFruit);
         Destroy(gameObject);
 
-        if (Managers.Data.fruits.Count > fruitData.level)
+        if (Managers.Data.fruits.Length > fruitData.level)
         {
             FruitsData newFruitData = Managers.Data.fruits[fruitData.level];
 
@@ -45,6 +43,5 @@ public class MergeFruit : MonoBehaviour
                 Managers.FruitsManager.InstantiateFruit(newFruitData, mergePosition, true);
             }
         }
-
     }
 }

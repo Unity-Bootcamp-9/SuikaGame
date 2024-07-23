@@ -1,10 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
+[Serializable]
 public class FruitsData
 {
-    public int level { get; set; }
-    public string name { get; set; }
-    public string path { get; set; }
+    public string name;
+    public int level;
+    public string path;
+}
+
+[Serializable]
+public class FruitGameData
+{
+    public FruitsData[] fruits;
 }
