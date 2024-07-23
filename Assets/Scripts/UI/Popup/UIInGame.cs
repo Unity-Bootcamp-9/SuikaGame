@@ -10,9 +10,9 @@ public class UIInGame : UIPopup
     // 텍스트
     enum Texts
     {
-        ScoreText,
+        Score,
         ScorePlusText,
-        ComboText,
+        ComboCount,
         ComboMultiText
     }
 
@@ -26,8 +26,12 @@ public class UIInGame : UIPopup
         NextFruitImage
     }
 
+    enum GameObjects
+    { 
+        ComboUI
+    }
+
     private FruitRandomSpawnManager fruitRandomSpawnManager;
-    private ScoreManager scoreManager;
 
     public override bool Init()
     {
@@ -37,23 +41,21 @@ public class UIInGame : UIPopup
         BindImage(typeof(Images));
         BindText(typeof(Texts));
 
-        fruitRandomSpawnManager = FindObjectOfType<FruitRandomSpawnManager>();
+        BindObject(typeof(GameObjects));
 
-        GetText((int)Texts.ScoreText);
-        GetText((int)Texts.ScorePlusText);
-        GetText((int)Texts.ComboText);
-        GetText((int)Texts.ComboMultiText);
+        fruitRandomSpawnManager = FindObjectOfType<FruitRandomSpawnManager>();
 
         if (fruitRandomSpawnManager != null)
         {
             fruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
         }
 
-        if (scoreManager != null)
-        {
-            scoreManager.OnScoreUpdated += UpdateScoreUI;
-            scoreManager.OnComboUpdated += UpdateComboUI;
-        }
+        Managers.ScoreManager.OnScoreUpdated += UpdateScoreUI;
+        Managers.ScoreManager.OnComboUpdated += UpdateComboUI;
+        Managers.ScoreManager.OnComboEnded += HideComboUI;
+
+        GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
+        GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
 
         return true;
     }
@@ -65,11 +67,9 @@ public class UIInGame : UIPopup
             fruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
         }
 
-        if (scoreManager != null)
-        {
-            scoreManager.OnScoreUpdated -= UpdateScoreUI;
-            scoreManager.OnComboUpdated -= UpdateComboUI;
-        }
+        Managers.ScoreManager.OnScoreUpdated -= UpdateScoreUI;
+        Managers.ScoreManager.OnComboUpdated -= UpdateComboUI;
+        Managers.ScoreManager.OnComboEnded -= HideComboUI;
     }
 
     private void UpdateNextFruitImage(string fruitName)
@@ -88,40 +88,33 @@ public class UIInGame : UIPopup
 
     private void UpdateScoreUI(float score, float scorePlus)
     {
-        if (GetText((int)Texts.ScoreText) != null)
-        {
-            GetText((int)Texts.ScoreText).text = $"점수: {score}";
-        }
+        GetText((int)Texts.Score).text = $"{score}";
 
-        if (GetText((int)Texts.ScorePlusText) != null)
-        {
-            GetText((int)Texts.ScorePlusText).text = $"+{scorePlus}";
-        }
+        GetText((int)Texts.ScorePlusText).gameObject.SetActive(true);
+        GetText((int)Texts.ScorePlusText).text = $"+{scorePlus}";
     }
 
     private void UpdateComboUI(int comboCount, float scoreMultiplier)
     {
-        if (GetText((int)Texts.ComboText) != null)
-        {
-            GetText((int)Texts.ComboText).text = $"{comboCount} 연쇄";
-        }
+        GetText((int)Texts.ComboMultiText).gameObject.SetActive(true);
+        GetText((int)Texts.ComboMultiText).text = $"+{scoreMultiplier}";
 
-        if (GetText((int)Texts.ComboMultiText) != null)
-        {
-            GetText((int)Texts.ComboMultiText).text = $"+{scoreMultiplier}";
-        }
+        GetObject((int)GameObjects.ComboUI).gameObject.SetActive(true);
 
-        // 콤보타이머 시작
-        // 코루틴으로 구현
-        // if (코루틴 중복 실행 방지 예외 처리)
-        {
-            StartCoroutine(ResetComboCoroutine());
-        }
-        Managers.ScoreManager.ResetCombo();
+        GetText((int)Texts.ComboCount).gameObject.SetActive(true);
+        GetText((int)Texts.ComboCount).text = $"{comboCount}";
+    }
+
+    private void HideComboUI()
+    {
+        GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
+
+        GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
     }
 
     private IEnumerator ResetComboCoroutine()
     {
         yield return new WaitForSeconds(3f);
+        HideComboUI();
     }
 }   

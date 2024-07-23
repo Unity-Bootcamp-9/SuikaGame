@@ -16,13 +16,13 @@ public class MergeFruit : MonoBehaviour
             if (otherFruit != null && otherFruit.fruitData.level == fruitData.level && !otherFruit.isMerged)
             {
                 MergeFruits(collision.gameObject);
-                Managers.ScoreManager.OnFruitMerged(fruitData);
             }
         }
     }
 
     private void MergeFruits(GameObject otherFruit)
     {
+        Managers.ScoreManager.OnFruitMerged(fruitData);
         isMerged = true;
         MergeFruit otherFruitScript = otherFruit.GetComponent<MergeFruit>();
         if (otherFruitScript != null)

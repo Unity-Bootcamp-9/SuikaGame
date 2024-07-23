@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 스와이프 관련 이벤트 제거 후 ThrowFruit에서 FruitRandomSpawnManager 호출 방식으로 변경
 public class FruitRandomSpawnManager : MonoBehaviour
 {
     [SerializeField]
