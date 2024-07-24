@@ -41,7 +41,11 @@ public class UISetPlatePosition : UIPopup
             if (_isDialogShowing == false)
             {
                 _isDialogShowing = true;
-                Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(() => { _isDialogShowing = false; }, "Info", "Please add a bowl in world with touch.", "Confirm");
+                Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(
+                    () => { _isDialogShowing = false; },
+                    "Info",
+                    "Please add a bowl in world with touch.",
+                    "Confirm");
             }
             return;
         }

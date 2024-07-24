@@ -39,12 +39,12 @@ public class UIGameOver : UIPopup
         return true;
     }
 
-    public void SetDialog(Action onClickYesButton, string title, string best, string score, string confirm)
+    public void SetDialog(Action onClickYesButton, string title, int bestScore, int currentScore, string confirm)
     {
         _onClickYesButton = onClickYesButton;
         _title = title;
-        _best = best;
-        _score = score;
+        _best = bestScore.ToString();
+        _score = currentScore.ToString();
         _confirm = confirm;
     }
 

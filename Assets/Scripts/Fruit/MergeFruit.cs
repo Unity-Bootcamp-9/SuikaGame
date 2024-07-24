@@ -9,7 +9,9 @@ public class MergeFruit : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!isMerged && collision.gameObject.CompareTag("Fruit"))
+        bool isPlacedOnBowl = GetComponent<CheckGameOver>().InBowl;
+
+        if (isPlacedOnBowl && !isMerged && collision.gameObject.CompareTag("Fruit"))
         {
             MergeFruit otherFruit = collision.gameObject.GetComponent<MergeFruit>();
 
