@@ -4,13 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 스와이프 관련 이벤트 제거 후 ThrowFruit에서 FruitRandomSpawnManager 호출 방식으로 변경
-public class FruitRandomSpawnManager : MonoBehaviour
+public class FruitRandomSpawnManager
 {
-    [SerializeField]
-    private SwipeEventAsset _swipeEventAsset;
-
-    [SerializeField] Transform fruitsSpawnPosition;
-    [SerializeField] Transform nextFruitsPosition;
+    Vector3 fruitsSpawnPosition = new Vector3(0.22f, -3f, -0.2f);
 
     private Stack<int> randomIndex = new Stack<int>();
     private GameObject currentFruit;
@@ -19,21 +15,12 @@ public class FruitRandomSpawnManager : MonoBehaviour
     public delegate void OnChangeRandom(string fruitName);
     public event OnChangeRandom OnChangeRandomEvent;
 
-    private bool isSwipe = false;
+    public bool IsSwipe {  get; set; }
 
-    private void Start()
+    public void Init()
     {
         MakeRandomIndex();
         SpawnFruits();
-
-        // 스와이프 이벤트 구독
-        _swipeEventAsset.eventRaised += OnSwipeEvent;
-    }
-
-    private void OnDestroy()
-    {
-        // 스와이프 이벤트 구독 해제
-        _swipeEventAsset.eventRaised -= OnSwipeEvent;
     }
 
     void MakeRandomIndex()
@@ -43,13 +30,16 @@ public class FruitRandomSpawnManager : MonoBehaviour
         randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
     }
 
-    void SpawnFruits()
+    public void SpawnFruits()
     {
         if (currentFruit != null)
         {
             // 현재 과일이 던져지면 분리
             currentFruit.transform.SetParent(null, true);
         }
+
+        // 프로토타입 이후 currentFruit랑 nextFruit 하나로 합치기
+        // 애초에 두개로 나눌 필요가 없어짐
 
         // 다음 과일을 현재 과일로 설정
         currentFruit = nextFruit;
@@ -61,7 +51,7 @@ public class FruitRandomSpawnManager : MonoBehaviour
         }
 
         // 새로운 다음 과일 생성
-        nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], nextFruitsPosition.position);
+        nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], fruitsSpawnPosition);
         if (nextFruit != null)
         {
             nextFruit.transform.SetParent(Camera.main.transform, false); // MainCamera의 자식으로 설정
@@ -77,33 +67,12 @@ public class FruitRandomSpawnManager : MonoBehaviour
     }
 
     // 모든 캡슐 콜라이더 활성화
-    private void EnableAllColliders(GameObject fruit)
+    public void EnableAllColliders(GameObject fruit)
     {
         CapsuleCollider[] colliders = fruit.GetComponentsInChildren<CapsuleCollider>();
         foreach (CapsuleCollider collider in colliders)
         {
             collider.enabled = true;
-        }
-    }
-
-    // 스와이프 이벤트 핸들러
-    public void OnSwipeEvent(object sender, SwipeData args)
-    {
-        if (!isSwipe)
-        {
-            // 스와이프 이벤트 발생 시 과일 업데이트
-            SpawnFruits();
-            EnableAllColliders(currentFruit);
-            isSwipe = true;
-        }
-    }
-
-    void Update()
-    {
-        // 스와이프가 완료된 후 다시 던질 수 있도록 상태 초기화
-        if (isSwipe)
-        {
-            isSwipe = false;            
         }
     }
 }
