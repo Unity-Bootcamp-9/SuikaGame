@@ -31,7 +31,6 @@ public class UIInGame : UIPopup
         ComboUI
     }
 
-    private FruitRandomSpawnManager fruitRandomSpawnManager;
 
     public override bool Init()
     {
@@ -43,12 +42,9 @@ public class UIInGame : UIPopup
 
         BindObject(typeof(GameObjects));
 
-        fruitRandomSpawnManager = FindObjectOfType<FruitRandomSpawnManager>();
+        Managers.FruitRandomSpawnManager.Init();
 
-        if (fruitRandomSpawnManager != null)
-        {
-            fruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
-        }
+        Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
 
         Managers.ScoreManager.OnScoreUpdated += UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated += UpdateComboUI;
@@ -62,10 +58,8 @@ public class UIInGame : UIPopup
 
     private void OnDisable()
     {
-        if (fruitRandomSpawnManager != null)
-        {
-            fruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
-        }
+
+        Managers.FruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
 
         Managers.ScoreManager.OnScoreUpdated -= UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated -= UpdateComboUI;

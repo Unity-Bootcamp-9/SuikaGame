@@ -1202,7 +1202,6 @@ GameObject:
   - component: {fileID: 5247537126520344958}
   - component: {fileID: 4068127159236064995}
   - component: {fileID: 1172363477477321153}
-  - component: {fileID: 4958905271404963373}
   m_Layer: 5
   m_Name: UIInGame
   m_TagString: Untagged
@@ -1310,21 +1309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236dc6aba3ded844cb12a7fb41c8fa16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4958905271404963373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914473891498434915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad83472477b4eea46af7f49a680debfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _swipeEventAsset: {fileID: 11400000, guid: 1e25d16e4f02c33428de76573b897bc1, type: 2}
-  fruitsSpawnPosition: {fileID: 1603068324892420236}
-  nextFruitsPosition: {fileID: 2537788024902482428}
 --- !u!1 &8296056281326146266
 GameObject:
   m_ObjectHideFlags: 0
