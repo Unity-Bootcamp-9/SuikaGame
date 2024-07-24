@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InGameScene : BaseScene
 {
@@ -11,9 +8,19 @@ public class InGameScene : BaseScene
             return false;
 
         SceneType = Define.Scene.Game;
-        Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(() => { Managers.UI.ShowPopupUI<UISetPlatePosition>(); }, "Info", "Please detect the floor to start game", "Enter");
+        Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(
+            MoveToInstallBowlStep,
+            "Info",
+            "Please detect the floor to start game",
+            "Enter");
+
         Debug.Log("Init");
 
         return true;
+    }
+
+    private void MoveToInstallBowlStep()
+    {
+        Managers.UI.ShowPopupUI<UISetPlatePosition>();
     }
 }

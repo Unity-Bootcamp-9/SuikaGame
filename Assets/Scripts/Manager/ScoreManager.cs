@@ -11,8 +11,8 @@ public class ScoreManager
     private float comboDuration = 3f;
     private float comboMulti = 1.1f;
 
-    public float Score { get; private set; }
-    public float BestScore { get; private set; }
+    public int Score { get; private set; }
+    public int BestScore { get; private set; }
 
     private Coroutine comboCoroutine;
 
@@ -58,7 +58,7 @@ public class ScoreManager
     private void UpdateScore(FruitsData fruitData)
     {
         int points = fruitData.level; // level을 점수로 사용
-        float scorePlus = Mathf.CeilToInt(points * comboMulti);
+        int scorePlus = Mathf.CeilToInt(points * comboMulti);
         Score += scorePlus;
         Debug.Log($"점수 : {Score}");
 
@@ -83,5 +83,12 @@ public class ScoreManager
 
         //if ( 리셋 여부 확인)
         OnComboUpdated?.Invoke(comboCount, comboMulti);
+    }
+
+    public void ResetAll()
+    {
+        ResetCombo();
+        Score = 0;
+        BestScore = 0;
     }
 }

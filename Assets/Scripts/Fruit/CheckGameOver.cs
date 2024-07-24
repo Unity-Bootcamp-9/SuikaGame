@@ -6,25 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class CheckGameOver : MonoBehaviour
 {
-    private bool inBowl = false;
+    public bool InBowl { get; private set; }
 
     public void TopggleInBowl()
     {
-        inBowl = !inBowl;
+        InBowl = !InBowl;
     }
 
-    // TODO: 접시 닿은건 Trigger로 처리
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"충돌됨 {collision.gameObject.tag}");
-        if (!inBowl && collision.gameObject.CompareTag("Bowl"))
+        if (!InBowl && collision.gameObject.CompareTag("Bowl"))
         {
-            inBowl = true;
+            InBowl = true;
         }
 
-        if (inBowl && collision.gameObject.CompareTag("Plane"))
+        if (InBowl && collision.gameObject.CompareTag("Plane"))
         {
-            Managers.UI.ShowPopupUI<UIGameOver>().SetDialog(() => { SceneManager.LoadScene(0); }, "GameOver", Managers.ScoreManager.Score.ToString(), Managers.ScoreManager.BestScore.ToString(), "ReStart");
+            Managers.GameManager.EnableGameOverDialog();
         }
 
         if (!inBowl && collision.gameObject.CompareTag("Plane"))
