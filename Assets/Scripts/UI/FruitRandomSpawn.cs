@@ -53,7 +53,7 @@ public class FruitRandomSpawnManager
         if (nextFruit != null)
         {
             nextFruit.transform.SetParent(Camera.main.transform, false); // MainCamera의 자식으로 설정
-            nextFruit.transform.localPosition = new Vector3(0.005f, -0.6f, 1.6f); // 위치 초기화
+            nextFruit.transform.localPosition = new Vector3(0.007f, -0.25f, 0.67f); // 위치 초기화
             nextFruit.transform.localRotation = Quaternion.Euler(-90, 0, 0);
         }
 

@@ -42,9 +42,9 @@ public class UIInGame : UIPopup
 
         BindObject(typeof(GameObjects));
 
-        Managers.FruitRandomSpawnManager.Init();
 
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
+        Managers.FruitRandomSpawnManager.Init();
 
         Managers.ScoreManager.OnScoreUpdated += UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated += UpdateComboUI;
