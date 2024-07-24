@@ -25,19 +25,6 @@ public class ThrowFruit : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
-    {
-        if (Managers.FruitRandomSpawnManager.IsSwipe)
-        {
-            Managers.FruitRandomSpawnManager.IsSwipe = false;
-        }
-
-        if (Managers.FruitRandomSpawnManager.IsSwipe)
-        {
-            Managers.FruitRandomSpawnManager.IsSwipe = false;
-        }
-    }
-
     private void OnEnable()
     {
         _swipeEventAsset.eventRaised += Throw;

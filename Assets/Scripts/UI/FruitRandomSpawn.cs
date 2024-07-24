@@ -15,8 +15,6 @@ public class FruitRandomSpawnManager
     public delegate void OnChangeRandom(string fruitName);
     public event OnChangeRandom OnChangeRandomEvent;
 
-    public bool IsSwipe {  get; set; }
-
     public void Init()
     {
         MakeRandomIndex();
