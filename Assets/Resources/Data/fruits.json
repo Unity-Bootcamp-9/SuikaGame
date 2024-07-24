@@ -14,6 +14,46 @@
       "name": "Durian",
       "level": 3,
       "path": "Prefabs/Durian"
+    },
+    {
+      "name": "Peach",
+      "level": 4,
+      "path": "Prefabs/Peach"
+    },
+    {
+      "name": "Apple",
+      "level": 5,
+      "path": "Prefabs/Apple"
+    },
+    {
+      "name": "Persimmon",
+      "level": 6,
+      "path": "Prefabs/Persimmon"
+    },
+    {
+      "name": "Pear",
+      "level": 7,
+      "path": "Prefabs/Pear"
+    },
+    {
+      "name": "Dragonfruit",
+      "level": 8,
+      "path": "Prefabs/Dragonfruit"
+    },
+    {
+      "name": "Pineapple",
+      "level": 9,
+      "path": "Prefabs/Pineapple"
+    },
+    {
+      "name": "Melon",
+      "level": 10,
+      "path": "Prefabs/Melon"
+    },
+    {
+      "name": "Watermelon",
+      "level": 11,
+      "path": "Prefabs/Watermelon"
     }
   ]
 }
