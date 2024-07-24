@@ -10,7 +10,9 @@ public class ScoreManager
     private float comboTimer = 0f;
     private float comboDuration = 3f;
     private float comboMulti = 1.1f;
-    private float score = 0;
+
+    public float Score { get; private set; }
+    public float BestScore { get; private set; }
 
     private Coroutine comboCoroutine;
 
@@ -57,10 +59,10 @@ public class ScoreManager
     {
         int points = fruitData.level; // level을 점수로 사용
         float scorePlus = Mathf.CeilToInt(points * comboMulti);
-        score += scorePlus;
-        Debug.Log($"점수 : {score}");
+        Score += scorePlus;
+        Debug.Log($"점수 : {Score}");
 
-        OnScoreUpdated?.Invoke(score, scorePlus);
+        OnScoreUpdated?.Invoke(Score, scorePlus);
     }
 
     private IEnumerator ComboTimer()

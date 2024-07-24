@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3660860482142805830}
   - component: {fileID: 7289908430612140079}
   - component: {fileID: 9182548952485617919}
+  - component: {fileID: -4680083932303626889}
   m_Layer: 0
   m_Name: Strawberry
   m_TagString: Fruit
@@ -188,5 +189,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 368c3aa0b6690f244884e907f7ee6c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruitData:
+    name: 
+    level: 0
+    path: 
+--- !u!114 &-4680083932303626889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009446025789454803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b397d18f167694fb5cf79acbe2608b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

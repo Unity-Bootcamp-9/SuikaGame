@@ -15,6 +15,7 @@ public class FruitsManager
                 fruitInstance.GetComponent<ThrowFruit>().enabled = false;
                 Collider[] colliders = fruitInstance.GetComponents<Collider>();
                 fruitInstance.GetComponent<Rigidbody>().useGravity = true;
+                fruitInstance.GetComponent<CheckGameOver>().TopggleInBowl();
 
                 foreach (Collider collider in colliders)
                 {
