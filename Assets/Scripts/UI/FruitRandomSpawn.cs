@@ -41,11 +41,6 @@ public class FruitRandomSpawnManager
 
         // 다음 과일을 현재 과일로 설정
         currentFruit = nextFruit;
-        if (currentFruit != null)
-        {
-            currentFruit.transform.SetParent(Camera.main.transform, false);
-            currentFruit.transform.localPosition = new Vector3(0.02f, -0.37f, 0.9f);
-        }
 
         // 새로운 다음 과일 생성
         nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], fruitsSpawnPosition);
