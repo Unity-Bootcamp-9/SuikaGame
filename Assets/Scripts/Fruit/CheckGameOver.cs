@@ -26,5 +26,10 @@ public class CheckGameOver : MonoBehaviour
         {
             Managers.UI.ShowPopupUI<UIGameOver>().SetDialog(() => { SceneManager.LoadScene(0); }, "GameOver", Managers.ScoreManager.Score.ToString(), Managers.ScoreManager.BestScore.ToString(), "ReStart");
         }
+
+        if (!inBowl && collision.gameObject.CompareTag("Plane"))
+        {
+            Destroy(gameObject, 3f);
+        }
     }
 }
