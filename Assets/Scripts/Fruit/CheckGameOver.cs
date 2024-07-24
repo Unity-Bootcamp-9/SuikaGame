@@ -25,7 +25,7 @@ public class CheckGameOver : MonoBehaviour
             Managers.GameManager.EnableGameOverDialog();
         }
 
-        if (!inBowl && collision.gameObject.CompareTag("Plane"))
+        if (!InBowl && collision.gameObject.CompareTag("Plane"))
         {
             Destroy(gameObject, 3f);
         }
