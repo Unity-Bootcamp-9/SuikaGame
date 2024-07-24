@@ -44,8 +44,7 @@ public class FruitRandomSpawnManager
         if (currentFruit != null)
         {
             currentFruit.transform.SetParent(Camera.main.transform, false);
-            currentFruit.transform.localPosition = new Vector3(0.02f, -0.37f, 0.9f); // 위치 초기화
-            currentFruit.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+            currentFruit.transform.localPosition = new Vector3(0.02f, -0.37f, 0.9f);
         }
 
         // 새로운 다음 과일 생성
@@ -53,8 +52,7 @@ public class FruitRandomSpawnManager
         if (nextFruit != null)
         {
             nextFruit.transform.SetParent(Camera.main.transform, false); // MainCamera의 자식으로 설정
-            nextFruit.transform.localPosition = new Vector3(0.007f, -0.25f, 0.67f); // 위치 초기화
-            nextFruit.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+            nextFruit.transform.localPosition = new Vector3(0.007f, -0.25f, 0.67f);
         }
 
         // 새로운 랜덤 인덱스 추가
