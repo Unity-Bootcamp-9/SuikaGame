@@ -45,9 +45,9 @@ public class UISetPlatePosition : UIPopup
                 _isDialogShowing = true;
                 Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(
                     () => { _isDialogShowing = false; },
-                    "Info",
-                    "Please add a bowl in world with touch.",
-                    "Confirm");
+                    "안내",
+                    "설치된 그릇이 없어요.\n터치로 그릇을 설치해주세요.",
+                    "확인");
             }
             return;
         }
