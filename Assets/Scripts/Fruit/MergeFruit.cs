@@ -19,6 +19,12 @@ public class MergeFruit : MonoBehaviour
             {
                 MergeFruits(collision.gameObject);
             }
+
+            if (otherFruit != null && otherFruit.GetComponent<CheckGameOver>().InBowl && !gameObject.GetComponent<CheckGameOver>().InBowl)
+            {
+                // 자기자신을 true로 변경
+                gameObject.GetComponent<CheckGameOver>().ToggleInBowl();
+            }
         }
     }
 
