@@ -5,19 +5,18 @@ public class UIMain : UIPopup
 {
     enum Texts
     {
-        TitleText,
-        BodyText,
-        ConfirmText
+        StartText,
+        ScoreBoardText
     }
 
     enum Buttons
     {
-        Confirm
+        StartButton,
+        ScoreBoardButton
     }
 
-    string _title;
-    string _body;
-    string _confirm;
+    string _start;
+    string _scoreBoard;
 
     public override bool Init()
     {
@@ -27,29 +26,37 @@ public class UIMain : UIPopup
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
 
-        GetButton((int)Buttons.Confirm).gameObject.BindEvent(OnClickYesButton);
+        GetButton((int)Buttons.StartButton).gameObject.BindEvent(OnClickStartButton);
+        GetButton((int)Buttons.ScoreBoardButton).gameObject.BindEvent(OnClickScoreBoardButton);
 
-        GetText((int)Texts.TitleText).text = _title;
-        GetText((int)Texts.BodyText).text = _body;
-        GetText((int)Texts.ConfirmText).text = _confirm;
+        GetText((int)Texts.StartText).text = "시작";
+        GetText((int)Texts.ScoreBoardText).text = "리더보드";
 
         return true;
     }
 
-    public void SetDialog(Action onClickYesButton, string title, string body, string confirm)
+    void OnClickStartButton()
     {
-        _onClickYesButton = onClickYesButton;
-        _title = title;
-        _body = body;
-        _confirm = confirm;
+        SceneManager.LoadScene("InGame");
     }
 
-    Action _onClickYesButton;
-    void OnClickYesButton()
+    void OnClickScoreBoardButton()
     {
         Managers.UI.ClosePopupUI(this);
-        if (_onClickYesButton != null)
-            _onClickYesButton.Invoke();
+        Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
+            () => { 
+                Managers.UI.ClosePopupUI(this);
+                Managers.UI.ShowPopupUI<UIMain>();
+            },
+            null,
+            "Score",
+            1, // Json으로 데이터 처리시 Num 내림 차순으로 수정
+            $"",
+            Managers.ScoreManager.Score, // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
+            "MainMenu",
+            "Restart",
+            true
+            );
     }
 
     void OnComplete()
