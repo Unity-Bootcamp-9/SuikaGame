@@ -35,7 +35,6 @@ public class Utils : MonoBehaviour
         return null;
     }
 
-
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
     {
         Transform transform = FindChild<Transform>(go, name, recursive);
