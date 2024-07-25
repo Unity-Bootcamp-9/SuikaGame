@@ -25,7 +25,7 @@ public class UISetPlatePosition : UIPopup
             return false;
 
         BindButton(typeof(Buttons));
-        // Find°è¿­ ¸Å¼­µåº¸´Ù main Camera¸¦ ±â¹İÀ¸·Î Parent¸¦ Å¸°í°¡´Â ¹æ½ÄÀÌ ¼º´É¸é¿¡¼­ ´õ ÁÁÀ» °Í °°¾Æ¼­ Àû¿ë ÇØºÃ´Âµ¥ ´õ ÁÁÀº ¹æ¹ıÀÌ ÀÖ´ÂÁö Ã£¾ÆºÁ¾ßµÊ.
+        // Findï¿½è¿­ ï¿½Å¼ï¿½ï¿½åº¸ï¿½ï¿½ main Cameraï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Parentï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É¸é¿¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ØºÃ´Âµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã£ï¿½Æºï¿½ï¿½ßµï¿½.
         XROrigin xrOrigin = Camera.main.transform.parent.parent.GetComponent<XROrigin>();
         _arPlaceObject = xrOrigin.GetComponent<ARPlaceObject>();
 
@@ -37,7 +37,7 @@ public class UISetPlatePosition : UIPopup
 
     private void EnterToInGame()
     {
-        // ¿ùµå»óÀ¸·Î ¼³Ä¡µÈ Á¢½Ã°¡ ¾øÀ» °æ¿ì ´ÙÀÌ¾ó·Î±× Ãâ·Â ÈÄ ±× ÀÌÈÄÀÇ ·ÎÁ÷ »ı·«
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (_arPlaceObject.GetSpawnedGameObject() == null)
         {
             if (_isDialogShowing == false)
@@ -45,9 +45,9 @@ public class UISetPlatePosition : UIPopup
                 _isDialogShowing = true;
                 Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(
                     () => { _isDialogShowing = false; },
-                    "Info",
-                    "Please add a bowl in world with touch.",
-                    "Confirm");
+                    "ì•ˆë‚´",
+                    "í™•ì¸ëœ ê·¸ë¦‡ì´ ì—†ì–´ìš”.\në°”ë‹¥ì„ í„°ì¹˜í•˜ì—¬ ê·¸ë¦‡ì„ ì„¤ì¹˜í•´ì£¼ì„¸ìš”.",
+                    "í™•ì¸");
             }
             return;
         }
