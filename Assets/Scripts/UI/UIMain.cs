@@ -1,13 +1,12 @@
 using System;
 using UnityEngine.SceneManagement;
 
-public class UIGameOver : UIPopup
+public class UIMain : UIPopup
 {
     enum Texts
     {
         TitleText,
-        BestScoreText,
-        CurrentText,
+        BodyText,
         ConfirmText
     }
 
@@ -17,8 +16,7 @@ public class UIGameOver : UIPopup
     }
 
     string _title;
-    string _best;
-    string _score;
+    string _body;
     string _confirm;
 
     public override bool Init()
@@ -32,19 +30,17 @@ public class UIGameOver : UIPopup
         GetButton((int)Buttons.Confirm).gameObject.BindEvent(OnClickYesButton);
 
         GetText((int)Texts.TitleText).text = _title;
-        GetText((int)Texts.BestScoreText).text = _best;
-        GetText((int)Texts.CurrentText).text = _score;
+        GetText((int)Texts.BodyText).text = _body;
         GetText((int)Texts.ConfirmText).text = _confirm;
 
         return true;
     }
 
-    public void SetDialog(Action onClickYesButton, string title, int bestScore, int currentScore, string confirm)
+    public void SetDialog(Action onClickYesButton, string title, string body, string confirm)
     {
         _onClickYesButton = onClickYesButton;
         _title = title;
-        _best = bestScore.ToString();
-        _score = currentScore.ToString();
+        _body = body;
         _confirm = confirm;
     }
 
