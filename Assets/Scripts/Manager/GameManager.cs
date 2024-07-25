@@ -47,7 +47,8 @@ public class GameManager
     {
         Managers.ScoreManager.ResetAll();
         isGameOverDialogEnabled = false;
-        //Managers.UI.ShowPopupUI<UIMainMenu>;
+        SceneManager.LoadScene("Main");
+        Managers.UI.ShowPopupUI<UIMain>();
     }
 
     private void ReloadGameScene()
