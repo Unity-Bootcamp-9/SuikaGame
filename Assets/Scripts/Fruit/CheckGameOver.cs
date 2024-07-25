@@ -8,7 +8,7 @@ public class CheckGameOver : MonoBehaviour
 {
     public bool InBowl { get; private set; }
 
-    public void TopggleInBowl()
+    public void ToggleInBowl()
     {
         InBowl = !InBowl;
     }
