@@ -25,7 +25,9 @@ public class UISetPlatePosition : UIPopup
             return false;
 
         BindButton(typeof(Buttons));
-        _arPlaceObject = FindObjectOfType<ARPlaceObject>();
+        // Find계열 매서드보다 main Camera를 기반으로 Parent를 타고가는 방식이 성능면에서 더 좋을 것 같아서 적용 해봤는데 더 좋은 방법이 있는지 찾아봐야됨.
+        XROrigin xrOrigin = Camera.main.transform.parent.parent.GetComponent<XROrigin>();
+        _arPlaceObject = xrOrigin.GetComponent<ARPlaceObject>();
 
         GetButton((int)Buttons.Install).gameObject.BindEvent(EnterToInGame);
         _arPlaceObject.installable = true;

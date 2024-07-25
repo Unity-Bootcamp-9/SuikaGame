@@ -462,13 +462,12 @@ GameObject:
   - component: {fileID: 378819495}
   - component: {fileID: 378819494}
   - component: {fileID: 378819493}
-  - component: {fileID: 378819492}
   - component: {fileID: 378819491}
   - component: {fileID: 378819490}
   - component: {fileID: 378819489}
   - component: {fileID: 378819488}
   m_Layer: 0
-  m_Name: XR Origin (XR Rig)
+  m_Name: XROrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,9 +499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d504bc11ea8f8346b51275b5bde7820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PrefabToPlace: {fileID: 2663176295759588294, guid: 2de9546cdf76d104594f534a3fcee9f5,
+  m_PrefabToPlace: {fileID: 9039452404970264385, guid: 317dea70e36e61b4191deb573f0d4ec7,
     type: 3}
   m_RaycastHitEvent: {fileID: 11400000, guid: 8ea51029b6b791a4188318dfcdf2077e, type: 2}
+  maxDistance: 2
   installable: 0
 --- !u!114 &378819490
 MonoBehaviour:
@@ -536,19 +536,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 0}
---- !u!114 &378819492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378819487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 2054246672}
 --- !u!114 &378819493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1076,7 @@ Transform:
   m_GameObject: {fileID: 2003248559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0695698, y: -0.84707385, z: 0.5043122}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

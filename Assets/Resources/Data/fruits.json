@@ -3,57 +3,57 @@
     {
       "name": "Blueberry",
       "level": 1,
-      "path": "Prefabs/Blueberry"
+      "path": "Prefabs/01. Blueberry"
     },
     {
       "name": "Strawberry",
       "level": 2,
-      "path": "Prefabs/Strawberry"
+      "path": "Prefabs/02. Strawberry"
     },
     {
       "name": "Durian",
       "level": 3,
-      "path": "Prefabs/Durian"
+      "path": "Prefabs/03. Durian"
     },
     {
       "name": "Peach",
       "level": 4,
-      "path": "Prefabs/Peach"
+      "path": "Prefabs/04. Peach"
     },
     {
       "name": "Apple",
       "level": 5,
-      "path": "Prefabs/Apple"
+      "path": "Prefabs/05. Apple"
     },
     {
       "name": "Persimmon",
       "level": 6,
-      "path": "Prefabs/Persimmon"
+      "path": "Prefabs/06. Persimmon"
     },
     {
       "name": "Pear",
       "level": 7,
-      "path": "Prefabs/Pear"
+      "path": "Prefabs/07. Pear"
     },
     {
       "name": "Dragonfruit",
       "level": 8,
-      "path": "Prefabs/Dragonfruit"
+      "path": "Prefabs/08. Dragonfruit"
     },
     {
       "name": "Pineapple",
       "level": 9,
-      "path": "Prefabs/Pineapple"
+      "path": "Prefabs/09. Pineapple"
     },
     {
       "name": "Melon",
       "level": 10,
-      "path": "Prefabs/Melon"
+      "path": "Prefabs/10. Melon"
     },
     {
       "name": "Watermelon",
       "level": 11,
-      "path": "Prefabs/Watermelon"
+      "path": "Prefabs/11. Watermelon"
     }
   ]
 }

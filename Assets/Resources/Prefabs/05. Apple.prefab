@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5840500628677608679
+--- !u!1 &2801701792830295936
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6505010734206164573}
-  - component: {fileID: 7920049820570030584}
-  - component: {fileID: 5336022359783105842}
-  - component: {fileID: 1071059165074506444}
-  - component: {fileID: -3755894651754396331}
-  - component: {fileID: -3287150970257323085}
-  - component: {fileID: -6889893603729467869}
-  - component: {fileID: 6461287366443005282}
+  - component: {fileID: 3290570310378181946}
+  - component: {fileID: 1875098154006141599}
+  - component: {fileID: 4458942550133583445}
+  - component: {fileID: 3107393963521362340}
+  - component: {fileID: 1427566777485006705}
+  - component: {fileID: 3271794162179414397}
+  - component: {fileID: -5146814296655044110}
+  - component: {fileID: -6178526205019524997}
+  - component: {fileID: -7431834384569672407}
   m_Layer: 0
-  m_Name: Strawberry
+  m_Name: 05. Apple
   m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6505010734206164573
+--- !u!4 &3290570310378181946
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -38,21 +39,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7920049820570030584
+--- !u!33 &1875098154006141599
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
-  m_Mesh: {fileID: -5378725270138161078, guid: 1a24af233828ab14c922148c21f005fa, type: 3}
---- !u!23 &5336022359783105842
+  m_GameObject: {fileID: 2801701792830295936}
+  m_Mesh: {fileID: 2054344993760455778, guid: 1be7f88c48fa19b42a9a8d956348a6bd, type: 3}
+--- !u!23 &4458942550133583445
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -66,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13276a4bdead99a42bc1371aa842c522, type: 2}
+  - {fileID: 2100000, guid: 336576ba8cb5e1c44b395b5d3c284613, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,13 +89,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &1071059165074506444
+--- !u!54 &3107393963521362340
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -115,13 +116,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &-3755894651754396331
+--- !u!136 &1427566777485006705
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -134,17 +135,40 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.042745452
-  m_Height: 0.104366705
-  m_Direction: 1
-  m_Center: {x: 0.00051756203, y: -0.0027560517, z: -0.00008322671}
---- !u!114 &-3287150970257323085
+  m_Radius: 0.06
+  m_Height: 0.128
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &3271794162179414397
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801701792830295936}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.06
+  m_Height: 0.128
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.003, z: 0}
+--- !u!114 &-5146814296655044110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb33a132defa948489493a8b1212f304, type: 3}
@@ -155,25 +179,25 @@ MonoBehaviour:
   _maxXThreshold: 0.8
   launchAngle: 55
   speed: 8
---- !u!114 &-6889893603729467869
+--- !u!114 &-6178526205019524997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58b397d18f167694fb5cf79acbe2608b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6461287366443005282
+--- !u!114 &-7431834384569672407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5840500628677608679}
+  m_GameObject: {fileID: 2801701792830295936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 368c3aa0b6690f244884e907f7ee6c94, type: 3}

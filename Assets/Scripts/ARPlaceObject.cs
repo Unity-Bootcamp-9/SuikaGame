@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
@@ -9,6 +10,9 @@ public class ARPlaceObject : MonoBehaviour
     GameObject m_PrefabToPlace;
     [SerializeField]
     ARRaycastHitEventAsset m_RaycastHitEvent;
+
+    [SerializeField]
+    private float maxDistance;
 
     public bool installable;
 
@@ -39,13 +43,25 @@ public class ARPlaceObject : MonoBehaviour
             return;
         }
 
+        Vector3 spawnPosition = hitPose.pose.position;
+        Vector3 cameraPosition = Camera.main.transform.position;
+        float distance = Vector3.Distance(cameraPosition, spawnPosition);
+
+        if (distance > maxDistance)
+        {
+            Vector3 direction = (spawnPosition - cameraPosition).normalized;
+            Vector3 clampedPosition = new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z) + direction * maxDistance;
+            clampedPosition.y = spawnPosition.y;
+            spawnPosition = clampedPosition;
+        }
+
         if (m_SpawnedObject == null)
         {
-            m_SpawnedObject = Instantiate(m_PrefabToPlace, hitPose.pose.position, hitPose.pose.rotation, hitPose.trackable.transform.parent);
+            m_SpawnedObject = Instantiate(m_PrefabToPlace, spawnPosition, hitPose.pose.rotation, hitPose.trackable.transform.parent);
         }
         else
         {
-            m_SpawnedObject.transform.position = hitPose.pose.position;
+            m_SpawnedObject.transform.position = spawnPosition;
             m_SpawnedObject.transform.parent = hitPose.trackable.transform.parent;
         }
     }
