@@ -60,10 +60,10 @@ public class FruitRandomSpawnManager
     // 모든 캡슐 콜라이더 활성화
     public void EnableAllColliders(GameObject fruit)
     {
-        CapsuleCollider[] colliders = fruit.GetComponentsInChildren<CapsuleCollider>();
-        foreach (CapsuleCollider collider in colliders)
+        Collider[] colliders = fruit.GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
         {
-            collider.enabled = true;
+            collider.isTrigger = false;
         }
     }
 }
