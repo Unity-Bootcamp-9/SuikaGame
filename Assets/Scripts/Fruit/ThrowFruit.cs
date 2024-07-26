@@ -42,15 +42,14 @@ public class ThrowFruit : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Debug.Log($"태그: {hit.transform.tag} Position: {hit.transform}");
-            if ((hit.transform.GetComponent<CheckGameOver>() != null && 
-                hit.transform.GetComponent<CheckGameOver>().InBowl) || 
-                !hit.transform.CompareTag("Fruit"))
+            if (!hit.transform.CompareTag("Fruit") ||
+                (hit.transform.GetComponent<CheckGameOver>() != null && 
+                hit.transform.GetComponent<CheckGameOver>().InBowl))
             {
                 return;
             }
         }
-        else
+        else // 공백 부분 스와이프 시 예외 처리
         {
             return;
         }
