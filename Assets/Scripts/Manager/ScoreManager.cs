@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
 using System.Collections;
 
 public class ScoreManager

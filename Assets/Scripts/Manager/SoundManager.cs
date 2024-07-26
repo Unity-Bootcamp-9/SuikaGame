@@ -27,6 +27,8 @@ public class SoundManager
                     _audioSources[i] = go.AddComponent<AudioSource>();
                     go.transform.parent = _soundRoot.transform;
                 }
+
+                _audioSources[(int)Define.Sound.Bgm].loop = true;
             }
         }
     }
