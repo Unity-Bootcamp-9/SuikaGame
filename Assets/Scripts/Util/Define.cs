@@ -14,4 +14,10 @@ public class Define
         Dev,
         Game
     }
+
+    public enum Sound
+    {
+        Bgm,
+        Effect
+    }
 }
