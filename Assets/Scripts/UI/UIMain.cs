@@ -31,7 +31,7 @@ public class UIMain : UIPopup
         GetButton((int)Buttons.ScoreBoardButton).gameObject.BindEvent(OnClickScoreBoardButton);
 
         GetText((int)Texts.StartText).text = "시작";
-        GetText((int)Texts.ScoreBoardText).text = "리더보드";
+        GetText((int)Texts.ScoreBoardText).text = "기록";
 
         return true;
     }
@@ -53,12 +53,12 @@ public class UIMain : UIPopup
                 Managers.UI.ShowPopupUI<UIMain>();
             },
             null,
-            "Score",
+            "점수",
             1, // Json으로 데이터 처리시 Num 내림 차순으로 수정
             $"",
             Managers.ScoreManager.Score, // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
-            "MainMenu",
-            "Restart",
+            "메인 메뉴",
+            "재시작",
             true
             );
     }
