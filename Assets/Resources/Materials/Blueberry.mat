@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Blueberry
-  m_Shader: {fileID: 4800000, guid: f90fb708fac042ccb3f191802bed7d4c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5032d67d8702eaa498edfee9c9fc11aa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

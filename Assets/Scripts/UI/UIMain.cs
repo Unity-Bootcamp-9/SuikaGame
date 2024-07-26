@@ -30,8 +30,8 @@ public class UIMain : UIPopup
         GetButton((int)Buttons.StartButton).gameObject.BindEvent(OnClickStartButton);
         GetButton((int)Buttons.ScoreBoardButton).gameObject.BindEvent(OnClickScoreBoardButton);
 
-        GetText((int)Texts.StartText).text = "½ÃÀÛ";
-        GetText((int)Texts.ScoreBoardText).text = "±â·Ï";
+        GetText((int)Texts.StartText).text = "ì‹œì‘";
+        GetText((int)Texts.ScoreBoardText).text = "ê¸°ë¡";
 
         return true;
     }
@@ -53,12 +53,12 @@ public class UIMain : UIPopup
                 Managers.UI.ShowPopupUI<UIMain>();
             },
             null,
-            "Á¡¼ö",
-            1, // JsonÀ¸·Î µ¥ÀÌÅÍ Ã³¸®½Ã Num ³»¸² Â÷¼øÀ¸·Î ¼öÁ¤
+            "ì ìˆ˜",
+            1, // Jsonìœ¼ë¡œ ë°ì´í„° ì²˜ë¦¬ì‹œ Num ë‚´ë¦¼ ì°¨ìˆœìœ¼ë¡œ ìˆ˜ì •
             $"",
-            Managers.ScoreManager.Score, // ¾À ¹Ù²î¸é¼­ Á¡¼ö ÃÊ±âÈ­ µÇ±â ¶§¹®¿¡ Json¿¡ Á¡¼ö ÀúÀå ÈÄ ºÒ·¯¿À´Â ·ÎÁ÷ ÇÊ¿ä
-            "¸ŞÀÎ ¸Ş´º",
-            "Àç½ÃÀÛ",
+            Managers.ScoreManager.Score, // ì”¬ ë°”ë€Œë©´ì„œ ì ìˆ˜ ì´ˆê¸°í™” ë˜ê¸° ë•Œë¬¸ì— Jsonì— ì ìˆ˜ ì €ì¥ í›„ ë¶ˆëŸ¬ì˜¤ëŠ” ë¡œì§ í•„ìš”
+            "ë©”ì¸ ë©”ë‰´",
+            "ì¬ì‹œì‘",
             true
             );
     }

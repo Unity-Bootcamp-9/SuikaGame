@@ -52,6 +52,8 @@ public class UISetPlatePosition : UIPopup
             return;
         }
 
+        _arPlaceObject.GetSpawnedGameObject().GetComponentInChildren<MeshRenderer>().material = Managers.Resource.Load<Material>("Materials/Bowl");
+
         _arPlaceObject.installable = false;
         Managers.UI.ClosePopupUI(this);
         Managers.UI.ShowPopupUI<UIInGame>();

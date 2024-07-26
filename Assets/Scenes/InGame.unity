@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d504bc11ea8f8346b51275b5bde7820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PrefabToPlace: {fileID: 9039452404970264385, guid: 317dea70e36e61b4191deb573f0d4ec7,
+  m_PrefabToPlace: {fileID: 9039452404970264385, guid: 1214d8cf1c1202b4abce49e6225a98d2,
     type: 3}
   m_RaycastHitEvent: {fileID: 11400000, guid: 8ea51029b6b791a4188318dfcdf2077e, type: 2}
   maxDistance: 2
