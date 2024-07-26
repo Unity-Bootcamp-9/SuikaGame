@@ -37,6 +37,24 @@ public class ThrowFruit : MonoBehaviour
 
     private void Throw(object sender, SwipeData args)
     {
+        // 레이케스트로 감지 + 태그로 조건 걸기
+        Ray ray = Camera.main.ScreenPointToRay(args.StartScreenPosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Debug.Log($"태그: {hit.transform.tag} Position: {hit.transform}");
+            if ((hit.transform.GetComponent<CheckGameOver>() != null && 
+                hit.transform.GetComponent<CheckGameOver>().InBowl) || 
+                !hit.transform.CompareTag("Fruit"))
+            {
+                return;
+            }
+        }
+        else
+        {
+            return;
+        }
+
         // �������� �¿������� Screen �������� ���� //
         //scoreManager.checkDropText.text = $"y: {args.ScreenDirection.y >= _minYThreshold} x: {Mathf.Abs(args.ScreenDirection.x) <= _maxXThreshold}";
         //scoreManager.direction.text = $"{args.ScreenDirection} / ABS x: {Mathf.Abs(args.ScreenDirection.x)}";
