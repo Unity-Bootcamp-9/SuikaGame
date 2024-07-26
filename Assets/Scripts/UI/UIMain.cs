@@ -1,5 +1,6 @@
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
 
 public class UIMain : UIPopup
 {
@@ -38,6 +39,9 @@ public class UIMain : UIPopup
     void OnClickStartButton()
     {
         SceneManager.LoadScene("InGame");
+
+        LoaderUtility.Deinitialize();
+        LoaderUtility.Initialize();
     }
 
     void OnClickScoreBoardButton()
