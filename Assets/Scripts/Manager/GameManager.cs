@@ -49,6 +49,7 @@ public class GameManager
         isGameOverDialogEnabled = false;
         SceneManager.LoadScene("Main");
         Managers.UI.ShowPopupUI<UIMain>();
+        LoaderUtility.Deinitialize();
     }
 
     private void ReloadGameScene()
