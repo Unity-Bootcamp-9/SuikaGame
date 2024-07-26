@@ -11,6 +11,7 @@ public class FruitRandomSpawnManager
     private Stack<int> randomIndex = new Stack<int>();
     private GameObject currentFruit;
     private GameObject nextFruit;
+    private int maxRange = 6;
 
     public delegate void OnChangeRandom(string fruitName);
     public event OnChangeRandom OnChangeRandomEvent;
@@ -24,8 +25,8 @@ public class FruitRandomSpawnManager
     void MakeRandomIndex()
     {
         randomIndex.Clear();
-        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
-        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
+        randomIndex.Push(UnityEngine.Random.Range(0, maxRange));
+        randomIndex.Push(UnityEngine.Random.Range(0, maxRange));
     }
 
     public void SpawnFruits()
@@ -51,7 +52,7 @@ public class FruitRandomSpawnManager
         }
 
         // 새로운 랜덤 인덱스 추가
-        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
+        randomIndex.Push(UnityEngine.Random.Range(0, maxRange));
 
         // 다음 과일 이미지 업데이트
         OnChangeRandomEvent?.Invoke(Managers.Data.fruits[randomIndex.Peek()].name);
