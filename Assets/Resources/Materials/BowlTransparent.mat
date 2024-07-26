@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bowl 2
-  m_Shader: {fileID: 4800000, guid: f90fb708fac042ccb3f191802bed7d4c, type: 3}
+  m_Name: BowlTransparent
+  m_Shader: {fileID: 4800000, guid: f784c8e9eb7743dfa4c2e08a1e81c408, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,8 +23,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: fe478dbbf3b45c148898914d2345f650, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 60bc94774873a974eb608046ebac8d9e, type: 3}
+        m_Texture: {fileID: 2800000, guid: fe478dbbf3b45c148898914d2345f650, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -75,6 +79,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 1c4dbd2c54e3d464a82b0040f8ebbed9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: fe478dbbf3b45c148898914d2345f650, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -93,6 +101,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 100
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _AlphaToMask: 0
@@ -103,17 +112,19 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DistanceCutoff: 0
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
     - _EnvironmentReflections: 1
+    - _Float0: 100
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _MaskClipValue: 0
     - _Metallic: 0
     - _MetallicStrength: 1
     - _Mode: 0
@@ -133,21 +144,25 @@ Material:
     - _SmoothnessStrength: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SpecularStrength: 0.04
+    - _SrcBlend: 5
     - _SrcBlendAlpha: 1
-    - _Surface: 0
+    - _Surface: 1
     - _UVSec: 0
     - _WorkflowMode: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Alpha: {r: 0, g: 0, b: 0, a: 1}
+    - _AlphaColor: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColor: {r: 0, g: 1, b: 1, a: 0.11764706}
+    - _Color: {r: 0.5882353, g: 1, b: 1, a: 0.19607843}
+    - _Color0: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
     - _RimColor: {r: 0, g: 0.5549643, b: 1, a: 0}
     - _RimFalloff: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WireColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WireColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5517714119395996007
 MonoBehaviour:

@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dragonfruit
-  m_Shader: {fileID: 4800000, guid: f90fb708fac042ccb3f191802bed7d4c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5032d67d8702eaa498edfee9c9fc11aa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -108,6 +108,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 4a53678acb2214c7aa104d85906b0982, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -152,6 +156,7 @@ Material:
     - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _LM_Intensity: 1
+    - _MaskClipValue: 0
     - _Metallic: 0
     - _NORMALMAP: 0
     - _NormalScale: 0
