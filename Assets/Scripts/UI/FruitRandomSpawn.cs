@@ -24,8 +24,8 @@ public class FruitRandomSpawnManager
     void MakeRandomIndex()
     {
         randomIndex.Clear();
-        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
-        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
+        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length - 6));
+        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length - 6));
     }
 
     public void SpawnFruits()
@@ -51,7 +51,7 @@ public class FruitRandomSpawnManager
         }
 
         // 새로운 랜덤 인덱스 추가
-        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length));
+        randomIndex.Push(UnityEngine.Random.Range(0, Managers.Data.fruits.Length - 6));
 
         // 다음 과일 이미지 업데이트
         OnChangeRandomEvent?.Invoke(Managers.Data.fruits[randomIndex.Peek()].name);
