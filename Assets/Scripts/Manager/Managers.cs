@@ -15,6 +15,7 @@ public class Managers : MonoBehaviour
     private static ScoreManager scoreManager = new();
     private static FruitsManager fruitsManager = new();
     private static GameManager gameManager = new();
+    private static SoundManager soundManager = new();
 
     public static DataManager Data { get { Init(); return dataManager; } }
     public static UIManager UI { get { Init(); return uiManager; } }
@@ -23,6 +24,7 @@ public class Managers : MonoBehaviour
     public static ScoreManager ScoreManager { get { Init(); return scoreManager; } }
     public static FruitsManager FruitsManager { get { Init(); return fruitsManager; } }
     public static GameManager GameManager { get { Init(); return gameManager; } }
+    public static SoundManager SoundManager { get { Init(); return soundManager; } }
 
     void Start()
     {
@@ -41,6 +43,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
 
             dataManager.Init();
+            soundManager.Init();
 
             Application.targetFrameRate = 60;
         }
