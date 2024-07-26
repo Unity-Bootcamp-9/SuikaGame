@@ -83,6 +83,8 @@ public class ThrowFruit : MonoBehaviour
         Managers.FruitRandomSpawnManager.SpawnFruits();
         Managers.FruitRandomSpawnManager.EnableAllColliders(gameObject);
 
+        Managers.SoundManager.Play(Define.Sound.Throw, "Throw");
+
         // �� ���� Throw �ǵ��� �̺�Ʈ ���� ����
         _swipeEventAsset.eventRaised -= Throw;
     }

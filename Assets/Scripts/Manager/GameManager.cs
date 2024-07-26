@@ -47,7 +47,7 @@ public class GameManager
     {
         Managers.ScoreManager.ResetAll();
         isGameOverDialogEnabled = false;
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(0);
         Managers.UI.ShowPopupUI<UIMain>();
         LoaderUtility.Deinitialize();
     }
@@ -56,7 +56,7 @@ public class GameManager
     {
         Managers.ScoreManager.ResetAll();
         isGameOverDialogEnabled = false;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         LoaderUtility.Deinitialize();
         LoaderUtility.Initialize();
     }

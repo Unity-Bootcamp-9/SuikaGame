@@ -25,10 +25,12 @@ public class SoundManager
                 {
                     GameObject go = new GameObject { name = soundTypeNames[i] };
                     _audioSources[i] = go.AddComponent<AudioSource>();
+                    _audioSources[i].playOnAwake = false;
                     go.transform.parent = _soundRoot.transform;
                 }
 
                 _audioSources[(int)Define.Sound.Bgm].loop = true;
+                _audioSources[(int)Define.Sound.Bgm].playOnAwake = true;
             }
         }
     }
@@ -49,6 +51,8 @@ public class SoundManager
         if (path.Contains("Audio/") == false)
             path = string.Format("Audio/{0}", path);
 
+        audioSource.volume = volume;
+
         if (type == Define.Sound.Bgm)
         {
             AudioClip audioClip = Managers.Resource.Load<AudioClip>(path);
@@ -58,20 +62,18 @@ public class SoundManager
             if (audioSource.isPlaying)
                 audioSource.Stop();
 
-            audioSource.volume = volume;
+            audioSource.clip = audioClip;
             audioSource.pitch = pitch;
-
             audioSource.Play();
             return true;
         }
-        else if (type == Define.Sound.Effect)
+        else if (type == Define.Sound.Throw || type == Define.Sound.Merge)
         {
             AudioClip audioClip = GetAudioClip(path);
             if (audioClip == null)
                 return false;
 
             audioSource.pitch = pitch;
-
             audioSource.PlayOneShot(audioClip);
             return true;
         }
