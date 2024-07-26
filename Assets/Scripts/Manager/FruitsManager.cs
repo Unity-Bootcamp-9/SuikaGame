@@ -19,9 +19,8 @@ public class FruitsManager
 
                 foreach (Collider collider in colliders)
                 {
-                    collider.enabled = true;
+                    collider.isTrigger = false;
                 }
-
             }
             fruitInstance.GetComponent<MergeFruit>().fruitData = fruitsData;
             //fruitInstance.transform.localPosition = Vector3.zero; // 위치 초기화
