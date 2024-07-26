@@ -9,8 +9,6 @@ public class ScoreManager
     private float comboDuration = 3f;
     private float comboMulti = 1.1f;
 
-    private float audioPitch = 1.0f;
-
     public int Score { get; private set; }
     public int BestScore { get; private set; }
 
@@ -43,15 +41,6 @@ public class ScoreManager
             comboMulti = 1.1f;
         }
         comboTimer = comboDuration;
-        Debug.Log($"점수 멀티플 : {comboMulti}");
-
-        audioPitch += 0.1f;
-        if (audioPitch >= 2.0)
-        {
-            audioPitch = 2.0f;
-        }
-
-        Managers.SoundManager.Play(Define.Sound.Effect, "Combo", 1.0f, audioPitch);
 
         if (comboCoroutine != null)
         {
@@ -59,6 +48,8 @@ public class ScoreManager
         }
 
         comboCoroutine = Managers.Instance.StartCoroutine(ComboResetCoroutine());
+        Managers.SoundManager.Play(Define.Sound.Merge, "Combo", 1.0f, comboMulti >= 2.0 ? 2.0f : comboMulti);
+
 
         OnComboUpdated?.Invoke(comboCount, comboMulti);
     }
@@ -84,7 +75,6 @@ public class ScoreManager
         comboCount = 0;
         comboMulti = 1.1f;
         comboTimer = 0f;
-        audioPitch = 1.0f;
     }
 
     public void ResetAll()

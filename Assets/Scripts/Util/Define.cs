@@ -18,6 +18,7 @@ public class Define
     public enum Sound
     {
         Bgm,
-        Effect
+        Merge,
+        Throw
     }
 }
