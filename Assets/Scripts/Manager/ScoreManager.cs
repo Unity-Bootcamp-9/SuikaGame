@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.IO;
+using Unity.VisualScripting;
+using System.Linq;
+using System.Collections.Generic;
 
 public class ScoreManager
 {
@@ -50,7 +54,6 @@ public class ScoreManager
         comboCoroutine = Managers.Instance.StartCoroutine(ComboResetCoroutine());
         Managers.SoundManager.Play(Define.Sound.Merge, "Combo", 1.0f, comboMulti >= 2.0 ? 2.0f : comboMulti);
 
-
         OnComboUpdated?.Invoke(comboCount, comboMulti);
     }
 
@@ -83,5 +86,22 @@ public class ScoreManager
         OnComboUpdated?.Invoke(comboCount, comboMulti);
         Score = 0;
         BestScore = 0;
+    }
+
+    public void SaveScore()
+    {
+        var dataManager = Managers.Data;
+        GameScoreData gameScoreData = dataManager.LoadScores();
+
+        var newScoreData = new ScoreData { num = gameScoreData.score.Length + 1, score = Score.ToString() };
+        var newScoreList = new List<ScoreData>(gameScoreData.score) { newScoreData };
+        gameScoreData.score = newScoreList.ToArray();
+
+        dataManager.SaveScores(gameScoreData);
+    }
+
+    public GameScoreData LoadScores()
+    {
+        return Managers.Data.LoadScores();
     }
 }

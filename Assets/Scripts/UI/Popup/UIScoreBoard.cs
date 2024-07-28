@@ -1,5 +1,7 @@
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIScoreBoard : UIPopup
 {
@@ -20,6 +22,12 @@ public class UIScoreBoard : UIPopup
         RestartButton
     }
 
+    enum GameObjects
+    {
+        ScoreLine,
+        Content
+    }
+
     string _title;
     string _number;
     string _currentScore;
@@ -27,6 +35,8 @@ public class UIScoreBoard : UIPopup
     string _mainButton;
     string _restartButton;
     bool _isGameOver;
+    GameObject _scoreLine;
+    Transform _content;
 
     public override bool Init()
     {
@@ -35,6 +45,7 @@ public class UIScoreBoard : UIPopup
 
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
+        BindObject(typeof(GameObjects));
 
         GetButton((int)Buttons.MainButton).gameObject.BindEvent(OnClickMainButton);
         GetButton((int)Buttons.RestartButton).gameObject.BindEvent(OnClickRestartButton);
@@ -46,6 +57,9 @@ public class UIScoreBoard : UIPopup
         GetText((int)Texts.MainButtonText).text = _mainButton;
         GetText((int)Texts.RestartButtonText).text = _restartButton;
 
+        _scoreLine = GetObject((int)GameObjects.ScoreLine);
+        _content = GetObject((int)GameObjects.Content).transform;
+
         if (_isGameOver)
         {
             // 버튼 비활성화
@@ -55,14 +69,12 @@ public class UIScoreBoard : UIPopup
         return true;
     }
 
-    public void SetBoardDialog(Action onClickMainButton, Action? onClickRestartButton, string title, int number, string currentScore, int score, string mainButton, string restartButton, bool isGameOver)
+    public void SetBoardDialog(Action onClickMainButton, Action? onClickRestartButton, string title, string currentScore, string mainButton, string restartButton, bool isGameOver)
     {
         _onClickMainButton = onClickMainButton;
         _onClickRestartButton = onClickRestartButton;
         _title = title;
-        _number = number.ToString();
         _currentScore = currentScore.ToString(); // null 이면 restartButton 비활성화
-        _score = score.ToString();
         _mainButton = mainButton.ToString();
         _restartButton = restartButton.ToString();
         _isGameOver = isGameOver;
@@ -89,5 +101,30 @@ public class UIScoreBoard : UIPopup
     void OnComplete()
     {
         Managers.UI.ClosePopupUI(this);
+    }
+
+    public void DisplayScores(GameScoreData gameScoreData)
+    {
+        // 점수를 내림차순으로 정렬
+        Array.Sort(gameScoreData.score, (x, y) => y.score.CompareTo(x.score));
+
+        // 새로운 ScoreLine 오브젝트 생성 및 점수 표시
+        foreach (var scoreData in gameScoreData.score)
+        {
+            var scoreLineInstance = Instantiate(_scoreLine, _content);
+            var texts = scoreLineInstance.GetComponentsInChildren<TextMeshPro>();
+
+            foreach (var text in texts)
+            {
+                if (text.name == "Number")
+                {
+                    text.text = scoreData.num.ToString();
+                }
+                else if (text.name == "Score")
+                {
+                    text.text = scoreData.score;
+                }
+            }
+        }
     }
 }

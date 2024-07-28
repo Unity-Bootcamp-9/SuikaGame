@@ -47,20 +47,30 @@ public class UIMain : UIPopup
     void OnClickScoreBoardButton()
     {
         Managers.UI.ClosePopupUI(this);
-        Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
+
+        // 저장된 점수 불러오기
+        var gameScoreData = Managers.ScoreManager.LoadScores();
+
+        // 최근 점수를 불러오기
+        int recentNumber = gameScoreData.score.Length > 0 ? gameScoreData.score[0].num : 0;
+        int recentScore = gameScoreData.score.Length > 0 ? int.Parse(gameScoreData.score[0].score) : 0;
+
+        // UIScoreBoard 보여주기
+        var uiScoreBoard = Managers.UI.ShowPopupUI<UIScoreBoard>();
+
+        uiScoreBoard.SetBoardDialog(
             () => { 
                 Managers.UI.ClosePopupUI(this);
                 Managers.UI.ShowPopupUI<UIMain>();
             },
             null,
             "점수",
-            1, // Json으로 데이터 처리시 Num 내림 차순으로 수정
-            $"",
-            Managers.ScoreManager.Score, // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
+            "",
             "메인 메뉴",
             "재시작",
             true
             );
+        uiScoreBoard.DisplayScores(gameScoreData);
     }
 
     void OnComplete()

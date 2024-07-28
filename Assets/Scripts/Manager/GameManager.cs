@@ -10,17 +10,25 @@ public class GameManager
         if (isGameOverDialogEnabled == false)
         {
             isGameOverDialogEnabled = true;
-            Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
+
+            Managers.ScoreManager.SaveScore();
+
+            var gameScoreData = Managers.ScoreManager.LoadScores();
+            var uiScoreData = Managers.UI.ShowPopupUI<UIScoreBoard>();
+
+            int recentNumber = gameScoreData.score.Length > 0 ? gameScoreData.score[0].num : 0;
+            int recentScore = gameScoreData.score.Length > 0 ? int.Parse(gameScoreData.score[0].score) : 0;
+
+            uiScoreData.SetBoardDialog(
                 LoadMainMenu,
                 ReloadGameScene,
-                "Score",
-                1, // Json으로 데이터 처리시 Num 내림 차순으로 수정
+                "점수",
                 $"{Managers.ScoreManager.Score}",
-                Managers.ScoreManager.Score, // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
-                "MainMenu",
-                "ReStart",
+                "메인 메뉴",
+                "재시작",
                 false
                 );
+            uiScoreData.DisplayScores(gameScoreData);
         }
     }
 
@@ -29,17 +37,23 @@ public class GameManager
         if (isGameOverDialogEnabled == false)
         {
             isGameOverDialogEnabled = true;
+
+            var gameScoreData = Managers.ScoreManager.LoadScores();
+            var uiScoreData = Managers.UI.ShowPopupUI<UIScoreBoard>();
+
+            int recentNumber = gameScoreData.score.Length > 0 ? gameScoreData.score[0].num : 0;
+            int recentScore = gameScoreData.score.Length > 0 ? int.Parse(gameScoreData.score[0].score) : 0;
+
             Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
                 LoadMainMenu,
                 null,
-                "Score",
-                1, // Json으로 데이터 처리시 Num 내림 차순으로 수정
-                $"",
-                Managers.ScoreManager.Score, // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
-                "MainMenu",
-                "Restart",
+                "점수",
+                "", // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
+                "메인 메뉴",
+                "제시작",
                 true
                 );
+            uiScoreData.DisplayScores(gameScoreData);
         }
     }
 
