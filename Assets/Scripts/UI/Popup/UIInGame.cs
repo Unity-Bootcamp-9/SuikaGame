@@ -24,7 +24,12 @@ public class UIInGame : UIPopup
 
     enum Images
     {
-        NextFruitImage
+        NextFruitImage,
+        // Item slot
+        ItemSlot1,
+        ItemSlot2,
+        // Passive slot
+        RespawnSlot
     }
 
     enum GameObjects
@@ -60,7 +65,10 @@ public class UIInGame : UIPopup
         scoreDataList = Managers.Data.score;
         scoreDataList.Sort();
 
-        GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+        if (scoreDataList != null && scoreDataList.Count > 0)
+        {
+            GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+        }
 
         return true;
     }
@@ -92,9 +100,16 @@ public class UIInGame : UIPopup
     private void UpdateScoreUI(float score, float scorePlus)
     {
         GetText((int)Texts.Score).text = $"{score}";
-        float finalBestScore = score >= scoreDataList[0].score ? score : scoreDataList[0].score;
 
-        GetText((int)Texts.BestScore).text = $"{finalBestScore}";
+        if (scoreDataList != null && scoreDataList.Count > 0)
+        {
+            float finalBestScore = score >= scoreDataList[0].score ? score : scoreDataList[0].score;
+            GetText((int)Texts.BestScore).text = $"{finalBestScore}";
+        }
+        else
+        {
+            GetText((int)Texts.BestScore).text = $"{score}";
+        }
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(true);
         GetText((int)Texts.ScorePlusText).text = $"+{scorePlus}";
