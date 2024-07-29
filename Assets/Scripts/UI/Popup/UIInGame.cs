@@ -103,7 +103,7 @@ public class UIInGame : UIPopup
     private void UpdateComboUI(int comboCount, float scoreMultiplier)
     {
         GetText((int)Texts.ComboMultiText).gameObject.SetActive(true);
-        GetText((int)Texts.ComboMultiText).text = $"+{scoreMultiplier}";
+        GetText((int)Texts.ComboMultiText).text = $"+{string.Format("{0:f1}", scoreMultiplier)}";
 
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(true);
 
