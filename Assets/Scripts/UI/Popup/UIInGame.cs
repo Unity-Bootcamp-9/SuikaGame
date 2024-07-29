@@ -58,7 +58,7 @@ public class UIInGame : UIPopup
 
         // 점수를 내림차순으로 정렬
         scoreDataList = Managers.Data.score;
-        scoreDataList.Sort((x, y) => y.score.CompareTo(x.score));
+        scoreDataList.Sort();
 
         GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
 
@@ -92,15 +92,9 @@ public class UIInGame : UIPopup
     private void UpdateScoreUI(float score, float scorePlus)
     {
         GetText((int)Texts.Score).text = $"{score}";
-        
-        if(score >= scoreDataList[0].score)
-        {
-            GetText((int)Texts.BestScore).text = $"{score}";
-        }
-        else
-        {
-            GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
-        }
+        float finalBestScore = score >= scoreDataList[0].score ? score : scoreDataList[0].score;
+
+        GetText((int)Texts.BestScore).text = $"{finalBestScore}";
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(true);
         GetText((int)Texts.ScorePlusText).text = $"+{scorePlus}";

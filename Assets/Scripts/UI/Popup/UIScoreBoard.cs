@@ -104,7 +104,7 @@ public class UIScoreBoard : UIPopup
     {
         // 점수를 내림차순으로 정렬
         List<ScoreData> scoreDataList = Managers.Data.score;
-        scoreDataList.Sort((x, y) => y.score.CompareTo(x.score));
+        scoreDataList.Sort();
 
         // 새로운 ScoreLine 오브젝트 생성 및 점수 표시
         for (int i = 0; i < scoreDataList.Count; ++i)
