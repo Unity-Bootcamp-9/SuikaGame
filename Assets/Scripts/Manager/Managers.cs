@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     private static FruitsManager fruitsManager = new();
     private static GameManager gameManager = new();
     private static SoundManager soundManager = new();
+    private static ItemManager itemManager = new();
 
     public static DataManager Data { get { Init(); return dataManager; } }
     public static UIManager UI { get { Init(); return uiManager; } }
@@ -25,6 +26,7 @@ public class Managers : MonoBehaviour
     public static FruitsManager FruitsManager { get { Init(); return fruitsManager; } }
     public static GameManager GameManager { get { Init(); return gameManager; } }
     public static SoundManager SoundManager { get { Init(); return soundManager; } }
+    public static ItemManager ItemManager { get { Init(); return itemManager; } }
 
     void Start()
     {

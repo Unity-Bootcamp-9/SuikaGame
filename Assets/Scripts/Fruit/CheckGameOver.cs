@@ -29,5 +29,12 @@ public class CheckGameOver : MonoBehaviour
         {
             Destroy(gameObject, 3f);
         }
+
+        if (InBowl && collision.gameObject.CompareTag("Plane") && !Managers.ItemManager.isHaveRevival)
+        {
+            Debug.Log("È¸»ý");
+            Managers.ItemManager.RevivalItem();
+            Destroy(gameObject);
+        }
     }
 }

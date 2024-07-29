@@ -28,6 +28,11 @@ public class ScoreManager
         UpdateScore(fruitData);
     }
 
+    public int ComboCount
+    {
+        get { return comboCount; }
+    }
+
     private void UpdateCombo()
     {
         if (comboTimer > 0)
