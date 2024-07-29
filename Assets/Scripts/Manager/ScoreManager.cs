@@ -90,18 +90,11 @@ public class ScoreManager
 
     public void SaveScore()
     {
-        var dataManager = Managers.Data;
-        GameScoreData gameScoreData = dataManager.LoadScores();
+        List<ScoreData> gameScoreData = Managers.Data.score;
 
-        var newScoreData = new ScoreData { num = gameScoreData.score.Length + 1, score = Score.ToString() };
-        var newScoreList = new List<ScoreData>(gameScoreData.score) { newScoreData };
-        gameScoreData.score = newScoreList.ToArray();
+        var newScoreData = new ScoreData {score = Score};
+        gameScoreData.Add(newScoreData);
 
-        dataManager.SaveScores(gameScoreData);
-    }
-
-    public GameScoreData LoadScores()
-    {
-        return Managers.Data.LoadScores();
+        Managers.Data.SaveData("score", new GameScoreData { score = gameScoreData });
     }
 }

@@ -13,11 +13,7 @@ public class GameManager
 
             Managers.ScoreManager.SaveScore();
 
-            var gameScoreData = Managers.ScoreManager.LoadScores();
             var uiScoreData = Managers.UI.ShowPopupUI<UIScoreBoard>();
-
-            int recentNumber = gameScoreData.score.Length > 0 ? gameScoreData.score[0].num : 0;
-            int recentScore = gameScoreData.score.Length > 0 ? int.Parse(gameScoreData.score[0].score) : 0;
 
             uiScoreData.SetBoardDialog(
                 LoadMainMenu,
@@ -28,7 +24,6 @@ public class GameManager
                 "재시작",
                 false
                 );
-            uiScoreData.DisplayScores(gameScoreData);
         }
     }
 
@@ -37,12 +32,7 @@ public class GameManager
         if (isGameOverDialogEnabled == false)
         {
             isGameOverDialogEnabled = true;
-
-            var gameScoreData = Managers.ScoreManager.LoadScores();
             var uiScoreData = Managers.UI.ShowPopupUI<UIScoreBoard>();
-
-            int recentNumber = gameScoreData.score.Length > 0 ? gameScoreData.score[0].num : 0;
-            int recentScore = gameScoreData.score.Length > 0 ? int.Parse(gameScoreData.score[0].score) : 0;
 
             Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
                 LoadMainMenu,
@@ -53,7 +43,6 @@ public class GameManager
                 "제시작",
                 true
                 );
-            uiScoreData.DisplayScores(gameScoreData);
         }
     }
 

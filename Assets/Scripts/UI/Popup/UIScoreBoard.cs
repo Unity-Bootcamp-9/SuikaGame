@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,22 +22,19 @@ public class UIScoreBoard : UIPopup
         MainButton,
         RestartButton
     }
-
+   
     enum GameObjects
     {
-        ScoreLine,
         Content
     }
 
     string _title;
-    string _number;
     string _currentScore;
-    string _score;
     string _mainButton;
     string _restartButton;
     bool _isGameOver;
     GameObject _scoreLine;
-    Transform _content;
+   
 
     public override bool Init()
     {
@@ -51,20 +49,19 @@ public class UIScoreBoard : UIPopup
         GetButton((int)Buttons.RestartButton).gameObject.BindEvent(OnClickRestartButton);
 
         GetText((int)Texts.TitleText).text = _title;
-        GetText((int)Texts.Number).text = _number;
         GetText((int)Texts.CurrentText).text = _currentScore;
-        GetText((int)Texts.Score).text = _score;
         GetText((int)Texts.MainButtonText).text = _mainButton;
         GetText((int)Texts.RestartButtonText).text = _restartButton;
-
-        _scoreLine = GetObject((int)GameObjects.ScoreLine);
-        _content = GetObject((int)GameObjects.Content).transform;
 
         if (_isGameOver)
         {
             // 버튼 비활성화
             GetButton((int)Buttons.RestartButton).gameObject.SetActive(false);
         }
+
+        _scoreLine = Managers.Resource.Load<GameObject>("Prefabs/UI/ScoreLine");
+
+        DisplayScores();
 
         return true;
     }
@@ -103,26 +100,28 @@ public class UIScoreBoard : UIPopup
         Managers.UI.ClosePopupUI(this);
     }
 
-    public void DisplayScores(GameScoreData gameScoreData)
+    public void DisplayScores()
     {
         // 점수를 내림차순으로 정렬
-        Array.Sort(gameScoreData.score, (x, y) => y.score.CompareTo(x.score));
+        List<ScoreData> scoreDataList = Managers.Data.score;
+        scoreDataList.Sort((x, y) => y.score.CompareTo(x.score));
 
         // 새로운 ScoreLine 오브젝트 생성 및 점수 표시
-        foreach (var scoreData in gameScoreData.score)
+        for (int i = 0; i < scoreDataList.Count; ++i)
         {
-            var scoreLineInstance = Instantiate(_scoreLine, _content);
-            var texts = scoreLineInstance.GetComponentsInChildren<TextMeshPro>();
+            GameObject scoreLineInstance = Instantiate(_scoreLine, GetObject((int)GameObjects.Content).transform);
+            TextMeshProUGUI[] texts = scoreLineInstance.GetComponentsInChildren<TextMeshProUGUI>();
 
-            foreach (var text in texts)
+            foreach (TextMeshProUGUI text in texts)
             {
                 if (text.name == "Number")
                 {
-                    text.text = scoreData.num.ToString();
+                    text.text = $"{i + 1}";
                 }
-                else if (text.name == "Score")
+
+                if (text.name == "Score")
                 {
-                    text.text = scoreData.score;
+                    text.text = scoreDataList[i].score.ToString();
                 }
             }
         }

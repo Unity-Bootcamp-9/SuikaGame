@@ -48,13 +48,6 @@ public class UIMain : UIPopup
     {
         Managers.UI.ClosePopupUI(this);
 
-        // 저장된 점수 불러오기
-        var gameScoreData = Managers.ScoreManager.LoadScores();
-
-        // 최근 점수를 불러오기
-        int recentNumber = gameScoreData.score.Length > 0 ? gameScoreData.score[0].num : 0;
-        int recentScore = gameScoreData.score.Length > 0 ? int.Parse(gameScoreData.score[0].score) : 0;
-
         // UIScoreBoard 보여주기
         var uiScoreBoard = Managers.UI.ShowPopupUI<UIScoreBoard>();
 
@@ -70,7 +63,6 @@ public class UIMain : UIPopup
             "재시작",
             true
             );
-        uiScoreBoard.DisplayScores(gameScoreData);
     }
 
     void OnComplete()

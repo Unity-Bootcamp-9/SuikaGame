@@ -13,7 +13,8 @@ public class UIInGame : UIPopup
         Score,
         ScorePlusText,
         ComboCount,
-        ComboMultiText
+        ComboMultiText,
+        BestScore
     }
 
     // 버튼
@@ -30,6 +31,8 @@ public class UIInGame : UIPopup
     { 
         ComboUI
     }
+
+    List<ScoreData> scoreDataList;
 
 
     public override bool Init()
@@ -52,6 +55,12 @@ public class UIInGame : UIPopup
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
+
+        // 점수를 내림차순으로 정렬
+        scoreDataList = Managers.Data.score;
+        scoreDataList.Sort((x, y) => y.score.CompareTo(x.score));
+
+        GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
 
         return true;
     }
@@ -83,6 +92,15 @@ public class UIInGame : UIPopup
     private void UpdateScoreUI(float score, float scorePlus)
     {
         GetText((int)Texts.Score).text = $"{score}";
+        
+        if(score >= scoreDataList[0].score)
+        {
+            GetText((int)Texts.BestScore).text = $"{score}";
+        }
+        else
+        {
+            GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+        }
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(true);
         GetText((int)Texts.ScorePlusText).text = $"+{scorePlus}";
