@@ -37,7 +37,7 @@ public class DataManager
 
     public void SaveData<T>(string path, T data)
     {
-        var json = JsonUtility.ToJson(data, true);
+        string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(Path.Combine(Application.dataPath, "Resources", "data", $"{path}.json"), json);
         Debug.Log($"점수 저장 : {json}");
     }
