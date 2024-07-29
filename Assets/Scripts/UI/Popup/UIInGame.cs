@@ -138,4 +138,20 @@ public class UIInGame : UIPopup
         yield return new WaitForSeconds(3f);
         HideComboUI();
     }
+
+    public void UpdateItemSlotUI(int slotIndex, bool isActive)
+    {
+        switch (slotIndex)
+        {
+            case 0:
+                GetImage((int)Images.RespawnSlot).gameObject.SetActive(isActive);
+                break;
+            case 1:
+                GetImage((int)Images.ItemSlot1).gameObject.SetActive(isActive);
+                break;
+            case 2:
+                GetImage((int)Images.ItemSlot2).gameObject.SetActive(isActive);
+                break;
+        }
+    }
 }   

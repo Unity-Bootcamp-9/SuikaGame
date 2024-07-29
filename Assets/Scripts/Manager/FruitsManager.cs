@@ -23,7 +23,6 @@ public class FruitsManager
                 }
             }
             fruitInstance.GetComponent<MergeFruit>().fruitData = fruitsData;
-            //fruitInstance.transform.localPosition = Vector3.zero; // 위치 초기화
             return fruitInstance;
         }
         else
