@@ -10,6 +10,8 @@ using UnityEngine;
 public class DataManager
 {
     public FruitsData[] fruits { get; private set; }
+    public List<ScoreData> score { get; private set; }
+
     // NOTE : 데이터테이블 추가해야함.
     // NOTE : 느슨한 식별자의 경우 List를, 엄격한 식별자의 경우 Dictionary 사용.
     // NOTE : Id를 열거형으로 만들어두면 오류낼 일이 적음
@@ -19,6 +21,7 @@ public class DataManager
     public void Init()
     {
         fruits = ParseToList<FruitGameData>("fruits").fruits;
+        score = ParseToList<GameScoreData>("score").score;
     }
 
     public T ParseToList<T>([NotNull] string path)
@@ -30,6 +33,13 @@ public class DataManager
 
             return gameData;
         }
+    }
+
+    public void SaveData<T>(string path, T data)
+    {
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(Path.Combine(Application.dataPath, "Resources", "data", $"{path}.json"), json);
+        Debug.Log($"점수 저장 : {json}");
     }
 
     //public Dictionary<Key, Item> ParseToDict<Key, Item>([NotNull] string path, Func<Item, Key> keySelector)
