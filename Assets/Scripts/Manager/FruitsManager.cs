@@ -23,7 +23,6 @@ public class FruitsManager
                 }
             }
             fruitInstance.GetComponent<MergeFruit>().fruitData = fruitsData;
-            //fruitInstance.transform.localPosition = Vector3.zero; // 위치 초기화
             return fruitInstance;
         }
         else
@@ -32,4 +31,12 @@ public class FruitsManager
             return null;
         }
     }
+/*
+    public GameObject InstantiateFruit(Transform targetParent, FruitsData fruitsData, Vector3 position, bool isMerged = false)
+    {
+        GameObject createdFruit = InstantiateFruit(fruitsData, position, isMerged);
+        createdFruit.transform.parent = targetParent;
+
+        return createdFruit;
+    }*/
 }

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class CheckGameOver : MonoBehaviour
 {
     public bool InBowl { get; private set; }
+    private bool isRevival = false;
 
     public void ToggleInBowl()
     {
@@ -20,8 +21,17 @@ public class CheckGameOver : MonoBehaviour
             InBowl = true;
         }
 
-        if (InBowl && collision.gameObject.CompareTag("Plane"))
+        if (InBowl && collision.gameObject.CompareTag("Plane") && Managers.ItemManager.isHaveRevival)
         {
+            Debug.Log("Revival used");
+            Destroy(gameObject);
+            Managers.ItemManager.RevivalItem();
+            isRevival = true;
+        }
+
+        if (InBowl && collision.gameObject.CompareTag("Plane") && !isRevival)
+        {
+            Debug.Log($"Revival: {Managers.ItemManager.isHaveRevival}");
             Managers.GameManager.EnableGameOverDialog();
         }
 
@@ -29,5 +39,6 @@ public class CheckGameOver : MonoBehaviour
         {
             Destroy(gameObject, 3f);
         }
+
     }
 }

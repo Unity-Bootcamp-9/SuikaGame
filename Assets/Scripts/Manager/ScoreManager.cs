@@ -28,6 +28,11 @@ public class ScoreManager
         UpdateScore(fruitData);
     }
 
+    public int ComboCount
+    {
+        get { return comboCount; }
+    }
+
     private void UpdateCombo()
     {
         if (comboTimer > 0)
@@ -53,6 +58,7 @@ public class ScoreManager
 
         comboCoroutine = Managers.Instance.StartCoroutine(ComboResetCoroutine());
         Managers.SoundManager.Play(Define.Sound.Merge, "Combo", 1.0f, comboMulti >= 2.0 ? 2.0f : comboMulti);
+        Managers.ItemManager.ItemGet();
 
         OnComboUpdated?.Invoke(comboCount, comboMulti);
     }

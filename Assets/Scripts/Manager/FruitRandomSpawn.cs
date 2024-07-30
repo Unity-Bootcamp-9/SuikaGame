@@ -31,12 +31,6 @@ public class FruitRandomSpawnManager
 
     public void SpawnFruits()
     {
-        if (currentFruit != null)
-        {
-            // 현재 과일이 던져지면 분리
-            currentFruit.transform.SetParent(null, true);
-        }
-
         // 프로토타입 이후 currentFruit랑 nextFruit 하나로 합치기
         // 애초에 두개로 나눌 필요가 없어짐
 
@@ -44,7 +38,7 @@ public class FruitRandomSpawnManager
         currentFruit = nextFruit;
 
         // 새로운 다음 과일 생성
-        nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], fruitsSpawnPosition);
+        nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], fruitsSpawnPosition);  
         if (nextFruit != null)
         {
             nextFruit.transform.SetParent(Camera.main.transform, false); // MainCamera의 자식으로 설정
