@@ -69,12 +69,27 @@ public class ItemManager
 
     public void LevelUpItem(GameObject targetFruit)
     {
-        // "Fruits" 태그이고, InBowl이 True인 과일 중 터치된 과일 레벨 업
-        GameObject.Destroy(targetFruit); // 기존 과일 제거
-        int nextLevel = targetFruit.GetComponent<MergeFruit>().fruitData.level;
+        // 과일 데이터 가져오기
+        var fruitData = targetFruit.GetComponent<MergeFruit>().fruitData;
+        int currentLevel = fruitData.level;
+        int maxLevel = Managers.Data.fruits.Length - 1;
 
+        // 최고 레벨인지 확인
+        if (currentLevel > maxLevel)
+        {
+            Debug.Log("최고 레벨 과일");
+            return; // 최고 레벨이면 레벨 업 중지
+        }
+
+        // 기존 과일 제거
+        GameObject.Destroy(targetFruit);
+
+        // 다음 레벨 과일 생성
+        int nextLevel = currentLevel;
         Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[nextLevel], targetFruit.transform.position, true);
-        currentUsingItem = -1; // 선택한 아이템 할당해제
+
+        // 선택한 아이템 할당 해제
+        currentUsingItem = -1;
     }
 
     public void DeleteItem(GameObject targetFruit)
