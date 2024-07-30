@@ -64,7 +64,7 @@ public class UIInGame : UIPopup
         Managers.ScoreManager.OnComboEnded += HideComboUI;
 
         Managers.ItemManager.OnItemSlotChangeEvent += UpdateItemSlotUI;
-        Managers.ItemManager.OnRevivalUseEvent += UpdateReviveUI;
+        Managers.ItemManager.OnRevivalToggleEvent += UpdateReviveUI;
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
@@ -96,7 +96,7 @@ public class UIInGame : UIPopup
         Managers.ScoreManager.OnComboEnded -= HideComboUI;
 
         Managers.ItemManager.OnItemSlotChangeEvent -= UpdateItemSlotUI;
-        Managers.ItemManager.OnRevivalUseEvent -= UpdateReviveUI;
+        Managers.ItemManager.OnRevivalToggleEvent -= UpdateReviveUI;
 
     }
 

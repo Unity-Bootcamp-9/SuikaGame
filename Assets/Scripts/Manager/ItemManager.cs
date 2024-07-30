@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemManager
@@ -13,7 +14,10 @@ public class ItemManager
     public event OnItemSlotChange OnItemSlotChangeEvent;
 
     public delegate void OnRevivalUse(bool isHavaeRevival);
-    public event OnRevivalUse OnRevivalUseEvent;
+    public event OnRevivalUse OnRevivalToggleEvent;
+
+    public int currentUsingItem;
+
 
     public void Init()
     {
@@ -38,7 +42,7 @@ public class ItemManager
                 if (!isHaveRevival)
                 {
                     isHaveRevival = true;
-                    OnRevivalUseEvent(isHaveRevival);
+                    OnRevivalToggleEvent(isHaveRevival);
                 }
                 return;
             }
@@ -56,40 +60,26 @@ public class ItemManager
 
     public void ItemUse(int slotIndex)
     {
-        Define.Item item = (Define.Item)slot[slotIndex];
-        // 아이템 사용 후 UI 업데이트
-
-        switch (item)
-        {
-            case Define.Item.LevelUp:
-                LevelUpItem();
-                break;
-            case Define.Item.Delete:
-                DeleteItem();
-                break;
-        }
+        // 현재 사용된 아이템이 뭔지 체크
+        currentUsingItem = slot[slotIndex];
 
         // 아이템 사용처리
         slot[slotIndex] = -1;
         OnItemSlotChangeEvent(slotIndex);
     }
 
-    void LevelUpItem()
+    public void LevelUpItem()
     {
-        /*// "Fruits" 자식으로 되어있는 과일들 중 하나를 랜덤 선택하여 현재 레벨 + 1 해줌
-        if (Managers.FruitsManager.fruitsParent != null && Managers.FruitsManager.fruitsParent.transform.childCount > 0)
-        {
-            int randomIndex = Random.Range(0, Managers.FruitsManager.fruitsParent.transform.childCount);
-            Transform randomFruit = Managers.FruitsManager.fruitsParent.transform.GetChild(randomIndex);
-            FruitsData fruitData = randomFruit.GetComponent<MergeFruit>().fruitData;
-            fruitData.level += 1; // 과일 레벨업
-        }*/
+        // "Fruits" 태그인 과일 중 터치된 과일 레벨 업
+
+        
     }
 
-    void DeleteItem()
+    public void DeleteItem(GameObject targetFruit)
     {
         // 터치된 과일의 태그가 "Fruit" 이고 "InBowl"이 True 라면 해당 과일 삭제
-
+        GameObject.Destroy(targetFruit);
+        currentUsingItem = -1; // 선택한 아이템 할당해제
     }
 
     public void RevivalItem()
@@ -97,7 +87,7 @@ public class ItemManager
         if (isHaveRevival)
         {
             isHaveRevival = false;
-            OnRevivalUseEvent?.Invoke(isHaveRevival);
+            OnRevivalToggleEvent?.Invoke(isHaveRevival);
         }
     }
 }
