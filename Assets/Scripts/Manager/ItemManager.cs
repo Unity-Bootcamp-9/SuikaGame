@@ -9,7 +9,7 @@ public class ItemManager
 
     public bool isHaveRevival { get; private set; }
 
-    public delegate void OnItemSlotChange(int slotIndex, bool isActive);
+    public delegate void OnItemSlotChange(int slotIndex);
     public event OnItemSlotChange OnItemSlotChangeEvent;
 
     public delegate void OnRevivalUse(bool isHavaeRevival);
@@ -26,23 +26,31 @@ public class ItemManager
 
     public void ItemGet()
     {
+        Debug.Log($"Combo count {Managers.ScoreManager.ComboCount}");
         if (Managers.ScoreManager.ComboCount % 5 == 0)
         {
             // 랜덤으로 지정된 아이템
-            int selectedItem = UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(Define.Item)).Length); // 0 1 2
-            int newItemIndex = Array.IndexOf(slot, -1);
-            // 아이템 슬롯에 아이템 추가
-            // 아이템 슬롯이 꽉차지 않을 때만 실행 (조건에 부합하지 않으면 -1 반환)
-            if (newItemIndex > -1)
+            int selectedItem = UnityEngine.Random.Range(0, Enum.GetValues(typeof(Define.Item)).Length);
+            int selectedSlot = Array.IndexOf(slot, -1);
+
+            if (selectedItem == (int)Define.Item.Revive)
             {
-                slot[newItemIndex] = selectedItem;
-                // 이벤트 실행
-                OnItemSlotChangeEvent(newItemIndex, true);
+                if (!isHaveRevival)
+                {
+                    isHaveRevival = true;
+                    OnRevivalUseEvent(isHaveRevival);
+                }
+                return;
             }
 
-            // 회생 아이템애 대한 조건 제어, getItem의 index가 2고 isHaveRevival이 false일 때만 토글처리
-            if ((Define.Item)selectedItem == Define.Item.Revive && isHaveRevival == false)
-                isHaveRevival = true;
+            // 아이템 슬롯에 아이템 추가
+            // 아이템 슬롯이 꽉차지 않을 때만 실행 (조건에 부합하지 않으면 -1 반환)
+            if (selectedSlot > -1)
+            {
+                slot[selectedSlot] = selectedItem;
+                // 이벤트 실행 
+                OnItemSlotChangeEvent(selectedSlot);
+            }
         }
     }
 
@@ -63,6 +71,7 @@ public class ItemManager
 
         // 아이템 사용처리
         slot[slotIndex] = -1;
+        OnItemSlotChangeEvent(slotIndex);
     }
 
     void LevelUpItem()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UIInGame : UIPopup
 {
@@ -52,19 +53,27 @@ public class UIInGame : UIPopup
 
         BindObject(typeof(GameObjects));
 
-/*        GetImage((int)Images.Item1).gameObject.BindEvent(OnClickItemButton);
-        GetImage((int)Images.Item2).gameObject.BindEvent(OnClickItemButton);
-*/
+        GetImage((int)Images.Item1).gameObject.BindEvent(() => OnClickItemButton(0));
+        GetImage((int)Images.Item2).gameObject.BindEvent(() => OnClickItemButton(1));
+
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
         Managers.FruitRandomSpawnManager.Init();
 
         Managers.ScoreManager.OnScoreUpdated += UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated += UpdateComboUI;
         Managers.ScoreManager.OnComboEnded += HideComboUI;
-        Managers.ItemManager.OnRevivalUseEvent += UpdateRevivalUI;
+
+        Managers.ItemManager.OnItemSlotChangeEvent += UpdateItemSlotUI;
+        Managers.ItemManager.OnRevivalUseEvent += UpdateReviveUI;
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
+
+        GetImage((int)Images.Item1).gameObject.SetActive(false);
+        GetImage((int)Images.Item2).gameObject.SetActive(false);
+
+        GetText((int)Texts.Item1Text).gameObject.SetActive(false);
+        GetText((int)Texts.Item2Text).gameObject.SetActive(false);
 
         // 점수를 내림차순으로 정렬
         scoreDataList = Managers.Data.score;
@@ -80,14 +89,14 @@ public class UIInGame : UIPopup
 
     private void OnDisable()
     {
-
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
 
         Managers.ScoreManager.OnScoreUpdated -= UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated -= UpdateComboUI;
         Managers.ScoreManager.OnComboEnded -= HideComboUI;
 
-        Managers.ItemManager.OnRevivalUseEvent -= UpdateRevivalUI;
+        Managers.ItemManager.OnItemSlotChangeEvent -= UpdateItemSlotUI;
+        Managers.ItemManager.OnRevivalUseEvent -= UpdateReviveUI;
 
     }
 
@@ -147,24 +156,58 @@ public class UIInGame : UIPopup
         HideComboUI();
     }
 
-    public void UpdateItemSlotUI(int slotIndex, bool isActive)
+    public void UpdateItemSlotUI(int slotIndex)
     {
-        switch (slotIndex)
+        // 현재 슬롯의 아이템
+        int selectedItem = Managers.ItemManager.slot[slotIndex];
+
+        if (selectedItem > -1)
         {
-            case 0:
-                GetImage((int)Images.Revive).gameObject.SetActive(isActive);
-                break;
-            case 1:
-                GetImage((int)Images.Item1).gameObject.SetActive(isActive);
-                break;
-            case 2:
-                GetImage((int)Images.Item2).gameObject.SetActive(isActive);
-                break;
+            // 이미지 스프라이트 변경 및 활성화
+            if (slotIndex == 0)
+            {
+                GetImage((int)Images.Item1).gameObject.SetActive(true);
+                GetText((int)Texts.Item1Text).gameObject.SetActive(true);
+                Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
+                GetImage((int)Images.Item1).sprite = sprite;
+                GetText((int)Texts.Item1Text).text = $"{((Define.Item)selectedItem)}";
+            }
+            else if (slotIndex == 1)
+            {
+                GetImage((int)Images.Item2).gameObject.SetActive(true);
+                GetText((int)Texts.Item2Text).gameObject.SetActive(true);
+                Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
+                GetImage((int)Images.Item2).sprite = sprite;
+                GetText((int)Texts.Item2Text).text = $"{((Define.Item)selectedItem)}";
+            }
+        }
+        else
+        {
+            // 이미지 비활성화
+            if (slotIndex == 0)
+            {
+                GetImage((int)Images.Item1).gameObject.SetActive(false);
+                GetText((int)Texts.Item1Text).text = "";
+            }
+            else if (slotIndex == 1)
+            {
+                GetImage((int)Images.Item2).gameObject.SetActive(false);
+                GetText((int)Texts.Item2Text).text = "";
+            }
         }
     }
 
-    public void UpdateRevivalUI(bool isRevival)
+    public void UpdateReviveUI(bool isRevival)
     {
-        GetImage((int)Images.Revive).gameObject.SetActive(isRevival);
+        Debug.Log(isRevival);
+        string imageName = isRevival ? "Revive" : "Revive2";
+        Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{imageName}");
+        GetImage((int)Images.Revive).sprite = sprite;
+    }
+
+    private void OnClickItemButton(int index)
+    {
+        Managers.ItemManager.ItemUse(index);
+
     }
 }   

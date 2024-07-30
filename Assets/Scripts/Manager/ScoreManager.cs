@@ -58,6 +58,7 @@ public class ScoreManager
 
         comboCoroutine = Managers.Instance.StartCoroutine(ComboResetCoroutine());
         Managers.SoundManager.Play(Define.Sound.Merge, "Combo", 1.0f, comboMulti >= 2.0 ? 2.0f : comboMulti);
+        Managers.ItemManager.ItemGet();
 
         OnComboUpdated?.Invoke(comboCount, comboMulti);
     }

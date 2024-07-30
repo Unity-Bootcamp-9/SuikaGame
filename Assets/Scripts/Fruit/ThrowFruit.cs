@@ -79,7 +79,7 @@ public class ThrowFruit : MonoBehaviour
         _rigidbody.useGravity = true;
         _rigidbody.AddForce(launchVelocity * force * speed, ForceMode.Impulse);
 
-        gameObject.transform.parent = Managers.FruitsManager.fruitsParent.transform;
+        gameObject.transform.SetParent(transform.root);
         Managers.FruitRandomSpawnManager.SpawnFruits();
         Managers.FruitRandomSpawnManager.EnableAllColliders(gameObject);
 
