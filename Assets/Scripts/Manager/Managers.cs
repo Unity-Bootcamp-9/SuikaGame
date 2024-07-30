@@ -46,6 +46,7 @@ public class Managers : MonoBehaviour
 
             dataManager.Init();
             soundManager.Init();
+            fruitsManager.Init();
 
             Application.targetFrameRate = 60;
         }

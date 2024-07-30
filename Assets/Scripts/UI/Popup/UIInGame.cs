@@ -51,12 +51,14 @@ public class UIInGame : UIPopup
         BindObject(typeof(GameObjects));
 
 
+
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
         Managers.FruitRandomSpawnManager.Init();
 
         Managers.ScoreManager.OnScoreUpdated += UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated += UpdateComboUI;
         Managers.ScoreManager.OnComboEnded += HideComboUI;
+        Managers.ItemManager.OnRevivalUseEvent += UpdateRevivalUI;
 
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
@@ -81,6 +83,9 @@ public class UIInGame : UIPopup
         Managers.ScoreManager.OnScoreUpdated -= UpdateScoreUI;
         Managers.ScoreManager.OnComboUpdated -= UpdateComboUI;
         Managers.ScoreManager.OnComboEnded -= HideComboUI;
+
+        Managers.ItemManager.OnRevivalUseEvent -= UpdateRevivalUI;
+
     }
 
     private void UpdateNextFruitImage(string fruitName)
@@ -153,5 +158,10 @@ public class UIInGame : UIPopup
                 GetImage((int)Images.ItemSlot2).gameObject.SetActive(isActive);
                 break;
         }
+    }
+
+    public void UpdateRevivalUI(bool isRevival)
+    {
+        GetImage((int)Images.RespawnSlot).gameObject.SetActive(isRevival);
     }
 }   
