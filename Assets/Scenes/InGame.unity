@@ -668,13 +668,15 @@ GameObject:
   m_Component:
   - component: {fileID: 378819497}
   - component: {fileID: 378819496}
-  - component: {fileID: 378819495}
   - component: {fileID: 378819494}
   - component: {fileID: 378819493}
   - component: {fileID: 378819491}
   - component: {fileID: 378819490}
   - component: {fileID: 378819489}
   - component: {fileID: 378819488}
+  - component: {fileID: 378819498}
+  - component: {fileID: 378819499}
+  - component: {fileID: 378819500}
   m_Layer: 0
   m_Name: XROrigin
   m_TagString: Untagged
@@ -776,20 +778,6 @@ MonoBehaviour:
   maximumTime: 1
   StartScreenPosition: {x: 0, y: 0, z: 0}
   EndScreenPosition: {x: 0, y: 0, z: 0}
---- !u!114 &378819495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378819487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017c5e3933235514c9520e1dace2a4b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ActionAssets:
-  - {fileID: -944628639613478452, guid: 8c2d70d82cc8ac44ebf438e3e77ceac9, type: 3}
 --- !u!114 &378819496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +812,46 @@ Transform:
   - {fileID: 1598253856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378819498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378819487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0507f642f9a0e49beab1dd641ac181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tapEventAsset: {fileID: 11400000, guid: 7887836d054673d4b9870de466e2e3c2, type: 2}
+--- !u!114 &378819499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378819487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6406eb77622f634fb73c218e5590ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InputActionReferences: {fileID: 11400000, guid: 9caa57fd8a95aad47bd5f676b51726af,
+    type: 2}
+--- !u!114 &378819500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378819487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77990cacded547408204f3e131deb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tapEventAsset: {fileID: 11400000, guid: 7887836d054673d4b9870de466e2e3c2, type: 2}
 --- !u!1 &1211827612
 GameObject:
   m_ObjectHideFlags: 0
