@@ -31,4 +31,12 @@ public class FruitsManager
             return null;
         }
     }
+/*
+    public GameObject InstantiateFruit(Transform targetParent, FruitsData fruitsData, Vector3 position, bool isMerged = false)
+    {
+        GameObject createdFruit = InstantiateFruit(fruitsData, position, isMerged);
+        createdFruit.transform.parent = targetParent;
+
+        return createdFruit;
+    }*/
 }

@@ -14,7 +14,9 @@ public class UIInGame : UIPopup
         ScorePlusText,
         ComboCount,
         ComboMultiText,
-        BestScore
+        BestScore,
+        Item1Text,
+        Item2Text
     }
 
     // ¹öÆ°
@@ -26,10 +28,10 @@ public class UIInGame : UIPopup
     {
         NextFruitImage,
         // Item slot
-        ItemSlot1,
-        ItemSlot2,
+        Item1,
+        Item2,
         // Passive slot
-        RespawnSlot
+        Revive
     }
 
     enum GameObjects
@@ -50,8 +52,9 @@ public class UIInGame : UIPopup
 
         BindObject(typeof(GameObjects));
 
-
-
+/*        GetImage((int)Images.Item1).gameObject.BindEvent(OnClickItemButton);
+        GetImage((int)Images.Item2).gameObject.BindEvent(OnClickItemButton);
+*/
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
         Managers.FruitRandomSpawnManager.Init();
 
@@ -149,19 +152,19 @@ public class UIInGame : UIPopup
         switch (slotIndex)
         {
             case 0:
-                GetImage((int)Images.RespawnSlot).gameObject.SetActive(isActive);
+                GetImage((int)Images.Revive).gameObject.SetActive(isActive);
                 break;
             case 1:
-                GetImage((int)Images.ItemSlot1).gameObject.SetActive(isActive);
+                GetImage((int)Images.Item1).gameObject.SetActive(isActive);
                 break;
             case 2:
-                GetImage((int)Images.ItemSlot2).gameObject.SetActive(isActive);
+                GetImage((int)Images.Item2).gameObject.SetActive(isActive);
                 break;
         }
     }
 
     public void UpdateRevivalUI(bool isRevival)
     {
-        GetImage((int)Images.RespawnSlot).gameObject.SetActive(isRevival);
+        GetImage((int)Images.Revive).gameObject.SetActive(isRevival);
     }
 }   

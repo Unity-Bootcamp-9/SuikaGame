@@ -21,4 +21,11 @@ public class Define
         Merge,
         Throw
     }
+
+    public enum Item
+    {
+        LevelUp,
+        Delete,
+        Revive
+    }
 }
