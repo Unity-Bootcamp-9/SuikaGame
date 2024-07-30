@@ -10,9 +10,7 @@ public class UIScoreBoard : UIPopup
     {
         TitleText, // 게임 오버
         CurrentText, // 현재 점수
-        Number, // 오름 차순 번호
         //UserName, // 사용자 이름 -> 로컬 환경에서는 필요 없어서 우선 주석 처리함
-        Score, // 내림 차순으로 정렬된 역대 점수
         MainButtonText, // 메인 버튼 텍스트
         RestartButtonText // 재시작 버튼 텍스트
     }

@@ -33,6 +33,11 @@ public class HandleTouchFruits : MonoBehaviour
                     Managers.ItemManager.DeleteItem(hit.transform.gameObject);
                     Debug.Log("접시 위 과일");
                 }
+
+                else if ((Define.Item)Managers.ItemManager.currentUsingItem == Define.Item.LevelUp)
+                {
+                    Managers.ItemManager.LevelUpItem(hit.transform.gameObject);
+                }
             }
         }
     }

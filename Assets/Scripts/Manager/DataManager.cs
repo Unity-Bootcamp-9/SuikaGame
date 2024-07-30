@@ -37,8 +37,21 @@ public class DataManager
 
     public void SaveData<T>(string path, T data)
     {
+        /*string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(Path.Combine(Application.dataPath, "Resources", "Data", $"{path}"));
+        Debug.Log($"점수 저장 : {json}");*/
+
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(Path.Combine(Application.dataPath, "Resources", "data", $"{path}.json"), json);
+        string fullPath = Path.Combine(Application.persistentDataPath, "Resources", "Data", path);
+
+        // 디렉토리가 존재하지 않으면 생성
+        string directoryPath = Path.GetDirectoryName(fullPath);
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        File.WriteAllText(fullPath, json);
         Debug.Log($"점수 저장 : {json}");
     }
 

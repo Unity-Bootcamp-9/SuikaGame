@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class CheckGameOver : MonoBehaviour
 {
     public bool InBowl { get; private set; }
+    [SerializeField]
     private bool isRevival = false;
 
     public void ToggleInBowl()

@@ -18,7 +18,6 @@ public class ItemManager
 
     public int currentUsingItem;
 
-
     public void Init()
     {
         // 모든 슬롯을 -1로 초기화해서 비어있음을 정의
@@ -68,11 +67,14 @@ public class ItemManager
         OnItemSlotChangeEvent(slotIndex);
     }
 
-    public void LevelUpItem()
+    public void LevelUpItem(GameObject targetFruit)
     {
-        // "Fruits" 태그인 과일 중 터치된 과일 레벨 업
+        // "Fruits" 태그이고, InBowl이 True인 과일 중 터치된 과일 레벨 업
+        GameObject.Destroy(targetFruit); // 기존 과일 제거
+        int nextLevel = targetFruit.GetComponent<MergeFruit>().fruitData.level;
 
-        
+        Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[nextLevel], targetFruit.transform.position, true);
+        currentUsingItem = -1; // 선택한 아이템 할당해제
     }
 
     public void DeleteItem(GameObject targetFruit)
@@ -89,5 +91,17 @@ public class ItemManager
             isHaveRevival = false;
             OnRevivalToggleEvent?.Invoke(isHaveRevival);
         }
+    }
+
+    public void ResetState()
+    {
+        slot = new int[2];
+        for (int i = 0; i < slot.Length; ++i) 
+        {
+            slot[i] = -1;
+        }
+
+        isHaveRevival = false;
+        currentUsingItem = -1;
     }
 }
