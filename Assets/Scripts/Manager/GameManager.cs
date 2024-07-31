@@ -4,6 +4,8 @@ using UnityEngine.XR.ARFoundation;
 public class GameManager
 {
     public bool isGameOverDialogEnabled = false;
+    public delegate void OnGameOver();
+    public event OnGameOver OnGameOverEvent;
 
     public void EnableGameOverDialog()
     {
@@ -13,6 +15,7 @@ public class GameManager
 
             Managers.ScoreManager.SaveScore();
 
+            OnGameOverEvent?.Invoke();
             var uiScoreData = Managers.UI.ShowPopupUI<UIScoreBoard>();
 
             uiScoreData.SetBoardDialog(
