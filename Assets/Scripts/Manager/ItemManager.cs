@@ -84,6 +84,8 @@ public class ItemManager
         // 기존 과일 제거
         GameObject.Destroy(targetFruit);
 
+        Managers.SoundManager.Play(Define.Sound.UseItem, "UseItem");
+        
         // 다음 레벨 과일 생성
         int nextLevel = currentLevel;
         Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[nextLevel], targetFruit.transform.position, true);
@@ -96,6 +98,9 @@ public class ItemManager
     {
         // 터치된 과일의 태그가 "Fruit" 이고 "InBowl"이 True 라면 해당 과일 삭제
         GameObject.Destroy(targetFruit);
+
+        Managers.SoundManager.Play(Define.Sound.UseItem, "UseItem");
+
         currentUsingItem = -1; // 선택한 아이템 할당해제
     }
 
