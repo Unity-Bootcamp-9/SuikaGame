@@ -33,7 +33,14 @@ public class CheckGameOver : MonoBehaviour
         if (InBowl && collision.gameObject.CompareTag("Plane") && !isRevival)
         {
             Debug.Log($"Revival: {Managers.ItemManager.isHaveRevival}");
-            Managers.GameManager.EnableGameOverDialog();
+
+            // °úÀÏ Distroy
+            foreach (Transform child in Camera.main.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            Managers.GameManager.EnableGameOverDialog();            
         }
 
         if (!InBowl && collision.gameObject.CompareTag("Plane"))

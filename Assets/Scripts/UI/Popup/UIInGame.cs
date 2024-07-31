@@ -66,6 +66,8 @@ public class UIInGame : UIPopup
         Managers.ItemManager.OnItemSlotChangeEvent += UpdateItemSlotUI;
         Managers.ItemManager.OnRevivalToggleEvent += UpdateReviveUI;
 
+        Managers.GameManager.OnGameOverEvent += DisableItemButtonsOnGameOver;
+
         GetText((int)Texts.ScorePlusText).gameObject.SetActive(false);
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
 
@@ -98,6 +100,7 @@ public class UIInGame : UIPopup
         Managers.ItemManager.OnItemSlotChangeEvent -= UpdateItemSlotUI;
         Managers.ItemManager.OnRevivalToggleEvent -= UpdateReviveUI;
 
+        Managers.GameManager.OnGameOverEvent -= DisableItemButtonsOnGameOver;
     }
 
     private void UpdateNextFruitImage(string fruitName)
@@ -202,6 +205,12 @@ public class UIInGame : UIPopup
                 GetText((int)Texts.Item2Text).text = "";
             }
         }
+    }
+
+    private void DisableItemButtonsOnGameOver()
+    {
+        GetImage((int)Images.Item1).GetComponent<UIEventHandler>().enabled = false;
+        GetImage((int)Images.Item2).GetComponent<UIEventHandler>().enabled = false;
     }
 
     public void UpdateReviveUI(bool isRevival)
