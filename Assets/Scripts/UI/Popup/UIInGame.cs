@@ -156,6 +156,13 @@ public class UIInGame : UIPopup
         HideComboUI();
     }
 
+    private Dictionary<Define.Item, string> itemNames = new Dictionary<Define.Item, string>
+    {
+        { Define.Item.LevelUp, "레벨 업" },
+        { Define.Item.Delete, "제거" },
+        // 추가적인 아이템을 여기에 매핑
+    };
+
     public void UpdateItemSlotUI(int slotIndex)
     {
         // 현재 슬롯의 아이템
@@ -170,7 +177,7 @@ public class UIInGame : UIPopup
                 GetText((int)Texts.Item1Text).gameObject.SetActive(true);
                 Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
                 GetImage((int)Images.Item1).sprite = sprite;
-                GetText((int)Texts.Item1Text).text = $"{((Define.Item)selectedItem)}";
+                GetText((int)Texts.Item1Text).text = $"{itemNames[(Define.Item)selectedItem]}";
             }
             else if (slotIndex == 1)
             {
@@ -178,7 +185,7 @@ public class UIInGame : UIPopup
                 GetText((int)Texts.Item2Text).gameObject.SetActive(true);
                 Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
                 GetImage((int)Images.Item2).sprite = sprite;
-                GetText((int)Texts.Item2Text).text = $"{((Define.Item)selectedItem)}";
+                GetText((int)Texts.Item2Text).text = $"{itemNames[(Define.Item)selectedItem]}";
             }
         }
         else

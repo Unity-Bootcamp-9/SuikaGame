@@ -7,6 +7,8 @@ public class InGameScene : BaseScene
         if (base.Init() == false)
             return false;
 
+        Managers.ItemManager.ResetState();
+
         SceneType = Define.Scene.Game;
         Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(
             MoveToInstallBowlStep,
