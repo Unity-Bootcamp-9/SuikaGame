@@ -78,6 +78,19 @@ public class SoundManager
             return true;
         }
 
+        else if (type == Define.Sound.UseItem)
+        {
+            AudioClip audioClip = GetAudioClip(path);
+            if (audioClip == null)
+            {
+                return false;
+            }
+
+            audioSource.pitch = pitch;
+            audioSource.PlayOneShot(audioClip);
+            return true;
+        }
+
         return false;
     }
 

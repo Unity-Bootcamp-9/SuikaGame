@@ -19,7 +19,8 @@ public class Define
     {
         Bgm,
         Merge,
-        Throw
+        Throw,
+        UseItem
     }
 
     public enum Item
