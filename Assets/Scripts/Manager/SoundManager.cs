@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -79,6 +78,19 @@ public class SoundManager
         }
 
         else if (type == Define.Sound.UseItem)
+        {
+            AudioClip audioClip = GetAudioClip(path);
+            if (audioClip == null)
+            {
+                return false;
+            }
+
+            audioSource.pitch = pitch;
+            audioSource.PlayOneShot(audioClip);
+            return true;
+        }
+
+        else if (type == Define.Sound.GetItem)
         {
             AudioClip audioClip = GetAudioClip(path);
             if (audioClip == null)

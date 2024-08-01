@@ -36,6 +36,8 @@ public class ItemManager
             int selectedItem = UnityEngine.Random.Range(0, Enum.GetValues(typeof(Define.Item)).Length);
             int selectedSlot = Array.IndexOf(slot, -1);
 
+            Managers.SoundManager.Play(Define.Sound.UseItem, "GetItem");
+
             if (selectedItem == (int)Define.Item.Revive)
             {
                 if (!isHaveRevival)
