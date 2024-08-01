@@ -100,6 +100,9 @@ public class UIScoreBoard : UIPopup
 
     public void DisplayScores()
     {
+        if (Managers.ScoreManager.LoadScore() == false)
+            return;
+
         // 점수를 내림차순으로 정렬
         List<ScoreData> scoreDataList = Managers.ScoreManager.scoreList;
         scoreDataList.Sort();
