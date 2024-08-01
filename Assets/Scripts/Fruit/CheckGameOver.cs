@@ -24,7 +24,8 @@ public class CheckGameOver : MonoBehaviour
 
         if (InBowl && collision.gameObject.CompareTag("Plane") && Managers.ItemManager.isHaveRevival)
         {
-            Debug.Log("Revival used");
+            Managers.SoundManager.Play(Define.Sound.UseItem, "UseItem");
+
             Destroy(gameObject);
             Managers.ItemManager.RevivalItem();
             isRevival = true;
@@ -32,8 +33,6 @@ public class CheckGameOver : MonoBehaviour
 
         if (InBowl && collision.gameObject.CompareTag("Plane") && !isRevival)
         {
-            Debug.Log($"Revival: {Managers.ItemManager.isHaveRevival}");
-
             // °úÀÏ Distroy
             foreach (Transform child in Camera.main.transform)
             {
