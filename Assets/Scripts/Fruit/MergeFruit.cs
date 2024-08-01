@@ -48,7 +48,12 @@ public class MergeFruit : MonoBehaviour
 
             if (newFruitData != null)
             {
-                Managers.FruitsManager.InstantiateFruit(newFruitData, mergePosition, true);
+                GameObject mergedFruit = Managers.FruitsManager.InstantiateFruit(newFruitData, mergePosition, true);
+                
+                GameObject smokeParticle = Managers.Resource.Load<GameObject>("Particles/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR Magic Poof");
+                GameObject createdSmokeParticle = Managers.Resource.Instantiate(smokeParticle);
+                createdSmokeParticle.transform.position = mergedFruit.transform.position;
+                createdSmokeParticle.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
         }
     }
