@@ -77,13 +77,16 @@ public class UIInGame : UIPopup
         GetText((int)Texts.Item1Text).gameObject.SetActive(false);
         GetText((int)Texts.Item2Text).gameObject.SetActive(false);
 
-        // 점수를 내림차순으로 정렬
-        scoreDataList = Managers.Data.score;
-        scoreDataList.Sort();
-
-        if (scoreDataList != null && scoreDataList.Count > 0)
+        if (Managers.ScoreManager.LoadScore() == true)
         {
-            GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+            // 점수를 내림차순으로 정렬
+            scoreDataList = Managers.ScoreManager.scoreList;
+            scoreDataList.Sort();
+
+            if (scoreDataList != null && scoreDataList.Count > 0)
+            {
+                GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+            }
         }
 
         return true;

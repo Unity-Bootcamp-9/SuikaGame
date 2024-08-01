@@ -101,7 +101,7 @@ public class UIScoreBoard : UIPopup
     public void DisplayScores()
     {
         // 점수를 내림차순으로 정렬
-        List<ScoreData> scoreDataList = Managers.Data.score;
+        List<ScoreData> scoreDataList = Managers.ScoreManager.scoreList;
         scoreDataList.Sort();
 
         // 새로운 ScoreLine 오브젝트 생성 및 점수 표시

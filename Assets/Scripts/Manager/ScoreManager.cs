@@ -5,6 +5,8 @@ using System.IO;
 using Unity.VisualScripting;
 using System.Linq;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEngine.Playables;
 
 public class ScoreManager
 {
@@ -21,6 +23,38 @@ public class ScoreManager
     public event Action<float, float> OnScoreUpdated;
     public event Action<int, float> OnComboUpdated;
     public event Action OnComboEnded;
+
+    // 리더보드
+    public List<ScoreData> scoreList { get; private set; }
+    private string _path = $"{Application.persistentDataPath}/score.json";
+    public bool LoadScore()
+    {
+        if (File.Exists(_path) == false)
+        {
+            if (scoreList == null)
+                scoreList = new();
+
+            return false;
+        }
+
+        string fileStr = File.ReadAllText(_path);
+        GameScoreData data = JsonUtility.FromJson<GameScoreData>(fileStr);
+
+        if (data != null)
+            scoreList = data.score;
+
+        Debug.Log($"Save Game Loaded : {_path}");
+        return true;
+    }
+
+    public void SaveScore()
+    {
+        scoreList.Add(new ScoreData { score = Score });
+        string jsonString = JsonUtility.ToJson(new GameScoreData { score = scoreList });
+        File.WriteAllText(_path, jsonString);
+
+        Debug.Log(_path);
+    }
 
     public void OnFruitMerged(FruitsData fruitData)
     {
@@ -92,15 +126,5 @@ public class ScoreManager
         OnComboUpdated?.Invoke(comboCount, comboMulti);
         Score = 0;
         BestScore = 0;
-    }
-
-    public void SaveScore()
-    {
-        List<ScoreData> gameScoreData = Managers.Data.score;
-
-        var newScoreData = new ScoreData {score = Score};
-        gameScoreData.Add(newScoreData);
-
-        Managers.Data.SaveData("score", new GameScoreData { score = gameScoreData });
     }
 }
