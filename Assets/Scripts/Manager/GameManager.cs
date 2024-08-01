@@ -21,10 +21,10 @@ public class GameManager
             uiScoreData.SetBoardDialog(
                 LoadMainMenu,
                 ReloadGameScene,
-                "Á¡¼ö",
+                "ì ìˆ˜",
                 $"{Managers.ScoreManager.Score}",
-                "¸ŞÀÎ ¸Ş´º",
-                "Àç½ÃÀÛ",
+                "ë©”ì¸ ë©”ë‰´",
+                "ì¬ì‹œì‘",
                 false
                 );
         }
@@ -40,10 +40,10 @@ public class GameManager
             Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
                 LoadMainMenu,
                 null,
-                "Á¡¼ö",
-                "", // ¾À ¹Ù²î¸é¼­ Á¡¼ö ÃÊ±âÈ­ µÇ±â ¶§¹®¿¡ Json¿¡ Á¡¼ö ÀúÀå ÈÄ ºÒ·¯¿À´Â ·ÎÁ÷ ÇÊ¿ä
-                "¸ŞÀÎ ¸Ş´º",
-                "Á¦½ÃÀÛ",
+                "ì ìˆ˜",
+                "", // ì”¬ ë°”ë€Œë©´ì„œ ì ìˆ˜ ì´ˆê¸°í™” ë˜ê¸° ë•Œë¬¸ì— Jsonì— ì ìˆ˜ ì €ì¥ í›„ ë¶ˆëŸ¬ì˜¤ëŠ” ë¡œì§ í•„ìš”
+                "ë©”ì¸ ë©”ë‰´",
+                "ì œì‹œì‘",
                 true
                 );
         }

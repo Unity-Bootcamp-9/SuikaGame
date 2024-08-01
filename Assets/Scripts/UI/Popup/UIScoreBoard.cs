@@ -8,11 +8,11 @@ public class UIScoreBoard : UIPopup
 {
     enum Texts
     {
-        TitleText, // °ÔÀÓ ¿À¹ö
-        CurrentText, // ÇöÀç Á¡¼ö
-        //UserName, // »ç¿ëÀÚ ÀÌ¸§ -> ·ÎÄÃ È¯°æ¿¡¼­´Â ÇÊ¿ä ¾ø¾î¼­ ¿ì¼± ÁÖ¼® Ã³¸®ÇÔ
-        MainButtonText, // ¸ŞÀÎ ¹öÆ° ÅØ½ºÆ®
-        RestartButtonText // Àç½ÃÀÛ ¹öÆ° ÅØ½ºÆ®
+        TitleText, // ê²Œì„ ì˜¤ë²„
+        CurrentText, // í˜„ì¬ ì ìˆ˜
+        //UserName, // ì‚¬ìš©ì ì´ë¦„ -> ë¡œì»¬ í™˜ê²½ì—ì„œëŠ” í•„ìš” ì—†ì–´ì„œ ìš°ì„  ì£¼ì„ ì²˜ë¦¬í•¨
+        MainButtonText, // ë©”ì¸ ë²„íŠ¼ í…ìŠ¤íŠ¸
+        RestartButtonText // ì¬ì‹œì‘ ë²„íŠ¼ í…ìŠ¤íŠ¸
     }
 
     enum Buttons
@@ -53,7 +53,7 @@ public class UIScoreBoard : UIPopup
 
         if (_isGameOver)
         {
-            // ¹öÆ° ºñÈ°¼ºÈ­
+            // ë²„íŠ¼ ë¹„í™œì„±í™”
             GetButton((int)Buttons.RestartButton).gameObject.SetActive(false);
         }
 
@@ -69,7 +69,7 @@ public class UIScoreBoard : UIPopup
         _onClickMainButton = onClickMainButton;
         _onClickRestartButton = onClickRestartButton;
         _title = title;
-        _currentScore = currentScore.ToString(); // null ÀÌ¸é restartButton ºñÈ°¼ºÈ­
+        _currentScore = currentScore.ToString(); // null ì´ë©´ restartButton ë¹„í™œì„±í™”
         _mainButton = mainButton.ToString();
         _restartButton = restartButton.ToString();
         _isGameOver = isGameOver;
@@ -100,11 +100,14 @@ public class UIScoreBoard : UIPopup
 
     public void DisplayScores()
     {
-        // Á¡¼ö¸¦ ³»¸²Â÷¼øÀ¸·Î Á¤·Ä
-        List<ScoreData> scoreDataList = Managers.Data.score;
+        if (Managers.ScoreManager.LoadScore() == false)
+            return;
+
+        // ì ìˆ˜ë¥¼ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
+        List<ScoreData> scoreDataList = Managers.ScoreManager.scoreList;
         scoreDataList.Sort();
 
-        // »õ·Î¿î ScoreLine ¿ÀºêÁ§Æ® »ı¼º ¹× Á¡¼ö Ç¥½Ã
+        // ìƒˆë¡œìš´ ScoreLine ì˜¤ë¸Œì íŠ¸ ìƒì„± ë° ì ìˆ˜ í‘œì‹œ
         for (int i = 0; i < scoreDataList.Count; ++i)
         {
             GameObject scoreLineInstance = Instantiate(_scoreLine, GetObject((int)GameObjects.Content).transform);

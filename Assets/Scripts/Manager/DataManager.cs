@@ -10,7 +10,6 @@ using UnityEngine;
 public class DataManager
 {
     public FruitsData[] fruits { get; private set; }
-    public List<ScoreData> score { get; private set; }
 
     // NOTE : 데이터테이블 추가해야함.
     // NOTE : 느슨한 식별자의 경우 List를, 엄격한 식별자의 경우 Dictionary 사용.
@@ -21,7 +20,6 @@ public class DataManager
     public void Init()
     {
         fruits = ParseToList<FruitGameData>("fruits").fruits;
-        score = ParseToList<GameScoreData>("score").score;
     }
 
     public T ParseToList<T>([NotNull] string path)
@@ -33,26 +31,6 @@ public class DataManager
 
             return gameData;
         }
-    }
-
-    public void SaveData<T>(string path, T data)
-    {
-        /*string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(Path.Combine(Application.dataPath, "Resources", "Data", $"{path}"));
-        Debug.Log($"점수 저장 : {json}");*/
-
-        string json = JsonUtility.ToJson(data, true);
-        string fullPath = Path.Combine(Application.persistentDataPath, "Resources", "Data", path);
-
-        // 디렉토리가 존재하지 않으면 생성
-        string directoryPath = Path.GetDirectoryName(fullPath);
-        if (!Directory.Exists(directoryPath))
-        {
-            Directory.CreateDirectory(directoryPath);
-        }
-
-        File.WriteAllText(fullPath, json);
-        Debug.Log($"점수 저장 : {json}");
     }
 
     //public Dictionary<Key, Item> ParseToDict<Key, Item>([NotNull] string path, Func<Item, Key> keySelector)

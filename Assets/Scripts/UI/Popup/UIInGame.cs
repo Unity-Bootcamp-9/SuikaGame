@@ -7,8 +7,8 @@ using System;
 
 public class UIInGame : UIPopup
 {
-    // ÀÌº¥Æ® º¯°æ, ÇÒ´çÇÒ ¿ä¼Ò //
-    // ÅØ½ºÆ®
+    // ì´ë²¤íŠ¸ ë³€ê²½, í• ë‹¹í•  ìš”ì†Œ //
+    // í…ìŠ¤íŠ¸
     enum Texts
     {
         Score,
@@ -20,7 +20,7 @@ public class UIInGame : UIPopup
         Item2Text
     }
 
-    // ¹öÆ°
+    // ë²„íŠ¼
     enum Buttons
     {
     }
@@ -77,13 +77,16 @@ public class UIInGame : UIPopup
         GetText((int)Texts.Item1Text).gameObject.SetActive(false);
         GetText((int)Texts.Item2Text).gameObject.SetActive(false);
 
-        // Á¡¼ö¸¦ ³»¸²Â÷¼øÀ¸·Î Á¤·Ä
-        scoreDataList = Managers.Data.score;
-        scoreDataList.Sort();
-
-        if (scoreDataList != null && scoreDataList.Count > 0)
+        if (Managers.ScoreManager.LoadScore() == true)
         {
-            GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+            // ì ìˆ˜ë¥¼ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
+            scoreDataList = Managers.ScoreManager.scoreList;
+            scoreDataList.Sort();
+
+            if (scoreDataList != null && scoreDataList.Count > 0)
+            {
+                GetText((int)Texts.BestScore).text = $"{scoreDataList[0].score}";
+            }
         }
 
         return true;
@@ -105,7 +108,7 @@ public class UIInGame : UIPopup
 
     private void UpdateNextFruitImage(string fruitName)
     {
-        // ÀÌ¹ÌÁö ¾÷µ¥ÀÌÆ®
+        // ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
         Sprite sprite = Resources.Load<Sprite>($"Images/Fruits/{fruitName}");
         if (sprite != null)
         {
@@ -113,7 +116,7 @@ public class UIInGame : UIPopup
         }
         else
         {
-            Debug.Log($"½ºÇÁ¶óÀÌÆ® ¾øÀ½ : Images/Fruits/{fruitName}");
+            Debug.Log($"ìŠ¤í”„ë¼ì´íŠ¸ ì—†ìŒ : Images/Fruits/{fruitName}");
         }
     }
 
@@ -161,19 +164,19 @@ public class UIInGame : UIPopup
 
     private Dictionary<Define.Item, string> itemNames = new Dictionary<Define.Item, string>
     {
-        { Define.Item.LevelUp, "·¹º§ ¾÷" },
-        { Define.Item.Delete, "Á¦°Å" },
-        // Ãß°¡ÀûÀÎ ¾ÆÀÌÅÛÀ» ¿©±â¿¡ ¸ÅÇÎ
+        { Define.Item.LevelUp, "ë ˆë²¨ ì—…" },
+        { Define.Item.Delete, "ì œê±°" },
+        // ì¶”ê°€ì ì¸ ì•„ì´í…œì„ ì—¬ê¸°ì— ë§¤í•‘
     };
 
     public void UpdateItemSlotUI(int slotIndex)
     {
-        // ÇöÀç ½½·ÔÀÇ ¾ÆÀÌÅÛ
+        // í˜„ì¬ ìŠ¬ë¡¯ì˜ ì•„ì´í…œ
         int selectedItem = Managers.ItemManager.slot[slotIndex];
 
         if (selectedItem > -1)
         {
-            // ÀÌ¹ÌÁö ½ºÇÁ¶óÀÌÆ® º¯°æ ¹× È°¼ºÈ­
+            // ì´ë¯¸ì§€ ìŠ¤í”„ë¼ì´íŠ¸ ë³€ê²½ ë° í™œì„±í™”
             if (slotIndex == 0)
             {
                 GetImage((int)Images.Item1).gameObject.SetActive(true);
@@ -193,7 +196,7 @@ public class UIInGame : UIPopup
         }
         else
         {
-            // ÀÌ¹ÌÁö ºñÈ°¼ºÈ­
+            // ì´ë¯¸ì§€ ë¹„í™œì„±í™”
             if (slotIndex == 0)
             {
                 GetImage((int)Images.Item1).gameObject.SetActive(false);
