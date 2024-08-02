@@ -8,9 +8,7 @@ public class FruitRandomSpawnManager
 {
     Vector3 fruitsSpawnPosition = new Vector3(0.22f, -3f, -0.2f);
 
-    private Stack<int> randomIndex = new Stack<int>();
-    private GameObject currentFruit;
-    private GameObject nextFruit;
+    private Queue<int> randomIndex = new Queue<int>();
     private int maxRange = 6;
 
     public delegate void OnChangeRandom(string fruitName);
@@ -25,20 +23,14 @@ public class FruitRandomSpawnManager
     void MakeRandomIndex()
     {
         randomIndex.Clear();
-        randomIndex.Push(UnityEngine.Random.Range(0, maxRange));
-        randomIndex.Push(UnityEngine.Random.Range(0, maxRange));
+        randomIndex.Enqueue(UnityEngine.Random.Range(0, maxRange));
+        randomIndex.Enqueue(UnityEngine.Random.Range(0, maxRange));
     }
 
     public void SpawnFruits()
     {
-        // 프로토타입 이후 currentFruit랑 nextFruit 하나로 합치기
-        // 애초에 두개로 나눌 필요가 없어짐
-
-        // 다음 과일을 현재 과일로 설정
-        currentFruit = nextFruit;
-
         // 새로운 다음 과일 생성
-        nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Pop()], fruitsSpawnPosition);  
+        GameObject nextFruit = Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[randomIndex.Dequeue()], fruitsSpawnPosition);  
         if (nextFruit != null)
         {
             nextFruit.transform.SetParent(Camera.main.transform, false); // MainCamera의 자식으로 설정
@@ -46,7 +38,7 @@ public class FruitRandomSpawnManager
         }
 
         // 새로운 랜덤 인덱스 추가
-        randomIndex.Push(UnityEngine.Random.Range(0, maxRange));
+        randomIndex.Enqueue(UnityEngine.Random.Range(0, maxRange));
 
         // 다음 과일 이미지 업데이트
         OnChangeRandomEvent?.Invoke(Managers.Data.fruits[randomIndex.Peek()].name);
