@@ -13,15 +13,23 @@
 
 ### 아이템
 
+<img src = "https://github.com/user-attachments/assets/65fc6ee5-0a3c-4d5f-8541-bfe1a3dd253c" width = "100" height = "70"/>
+
 **회생**
 
 과일이 그릇 밖에 떨어져도 한번의 기회를 준다
 
+<img src = "https://github.com/user-attachments/assets/793e1eb1-a13e-4967-9cbf-df5f1782cd67" width = "100" height = "100"/>
+
 **레벨 업**
+
 
 그릇 위에 과일을 터치 하면 (수박 제외) 과일이 한 단계 레벨 업 된다
 
+<img src = "https://github.com/user-attachments/assets/239f048b-e2a8-4f47-a70e-f3335ea80868" width = "100" height = "100"/>
+
 **제거**
+
 
 그릇 위에 과일을 터치 하면 해당 과일이 삭제된다
 
