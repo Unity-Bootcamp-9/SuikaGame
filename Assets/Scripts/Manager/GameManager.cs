@@ -30,25 +30,6 @@ public class GameManager
         }
     }
 
-    public void EnableMainDialog()
-    {
-        if (isGameOverDialogEnabled == false)
-        {
-            isGameOverDialogEnabled = true;
-            var uiScoreData = Managers.UI.ShowPopupUI<UIScoreBoard>();
-
-            Managers.UI.ShowPopupUI<UIScoreBoard>().SetBoardDialog(
-                LoadMainMenu,
-                null,
-                "점수",
-                "", // 씬 바뀌면서 점수 초기화 되기 때문에 Json에 점수 저장 후 불러오는 로직 필요
-                "메인 메뉴",
-                "제시작",
-                true
-                );
-        }
-    }
-
     private void LoadMainMenu()
     {
         Managers.ScoreManager.ResetAll();
