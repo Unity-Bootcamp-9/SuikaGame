@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UIInGame : UIPopup
 {
@@ -23,6 +24,9 @@ public class UIInGame : UIPopup
     // 버튼
     enum Buttons
     {
+        Back,
+        Pause,
+        Replace
     }
 
     enum Images
@@ -41,7 +45,7 @@ public class UIInGame : UIPopup
     }
 
     List<ScoreData> scoreDataList;
-
+    bool isPause;
 
     public override bool Init()
     {
@@ -50,11 +54,15 @@ public class UIInGame : UIPopup
 
         BindImage(typeof(Images));
         BindText(typeof(Texts));
-
+        BindButton(typeof(Buttons));
         BindObject(typeof(GameObjects));
 
         GetImage((int)Images.Item1).gameObject.BindEvent(() => OnClickItemButton(0));
         GetImage((int)Images.Item2).gameObject.BindEvent(() => OnClickItemButton(1));
+
+        GetButton((int)Buttons.Back).gameObject.BindEvent(() => OnClickBackButton());
+        GetButton((int)Buttons.Replace).gameObject.BindEvent(() => OnClickReplaceButton());
+        GetButton((int)Buttons.Pause).gameObject.BindEvent(() => OnClickPauseButton());
 
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
         Managers.FruitRandomSpawnManager.Init();
@@ -227,6 +235,31 @@ public class UIInGame : UIPopup
     private void OnClickItemButton(int index)
     {
         Managers.ItemManager.ItemUse(index);
+    }
 
+    private void OnClickBackButton()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    private void OnClickReplaceButton()
+    {
+        // 그릇 재설치 함수 호출
+    }
+
+    private void OnClickPauseButton()
+    {
+        if (!isPause)
+        {
+            isPause = true;
+            // 여기서 던지는거랑 아이템 사용 막는 코드 호출 해야할 듯...
+            Time.timeScale = 0;
+        }
+        else
+        {
+            isPause = false;
+            // 여기서는 다시 활성화...
+            Time.timeScale = 1;
+        }
     }
 }   
