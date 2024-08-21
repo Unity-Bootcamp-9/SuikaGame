@@ -16,8 +16,6 @@ public class ItemManager
     public delegate void OnRevivalUse(bool isHavaeRevival);
     public event OnRevivalUse OnRevivalToggleEvent;
 
-    public int currentUsingItem;
-
     public void Init()
     {
         // 모든 슬롯을 -1로 초기화해서 비어있음을 정의
@@ -59,14 +57,10 @@ public class ItemManager
         }
     }
 
-    public void ItemUse(int slotIndex)
+    public int selectedSlot = -1;
+    public void UseItem(int slotIndex)
     {
-        // 현재 사용된 아이템이 뭔지 체크
-        currentUsingItem = slot[slotIndex];
-
-        // 아이템 사용처리
-        slot[slotIndex] = -1;
-        OnItemSlotChangeEvent(slotIndex);
+        selectedSlot = slotIndex;
     }
 
     public void LevelUpItem(GameObject targetFruit)
@@ -93,7 +87,9 @@ public class ItemManager
         Managers.FruitsManager.InstantiateFruit(Managers.Data.fruits[nextLevel], targetFruit.transform.position, true);
 
         // 선택한 아이템 할당 해제
-        currentUsingItem = -1;
+        slot[selectedSlot] = -1;
+        OnItemSlotChangeEvent(selectedSlot);
+        selectedSlot = -1;
     }
 
     public void DeleteItem(GameObject targetFruit)
@@ -103,7 +99,9 @@ public class ItemManager
 
         Managers.SoundManager.Play(Define.Sound.UseItem, "UseItem");
 
-        currentUsingItem = -1; // 선택한 아이템 할당해제
+        slot[selectedSlot] = -1;
+        OnItemSlotChangeEvent(selectedSlot);
+        selectedSlot = -1;
     }
 
     public void RevivalItem()
@@ -124,6 +122,10 @@ public class ItemManager
         }
 
         isHaveRevival = false;
-        currentUsingItem = -1;
+        selectedSlot = -1;
+        for (int i = 0 ; i < slot.Length; ++i)
+        {
+            slot[i] = -1;
+        }
     }
 }
