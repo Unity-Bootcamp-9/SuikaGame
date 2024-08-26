@@ -18,7 +18,8 @@ public class UIInGame : UIPopup
         ComboMultiText,
         BestScore,
         Item1Text,
-        Item2Text
+        Item2Text,
+        Timer
     }
 
     // 버튼
@@ -38,7 +39,8 @@ public class UIInGame : UIPopup
         // Passive slot
         Revive,
         // Pause Menu
-        Pause
+        Pause,
+        TimerImage
     }
 
     enum GameObjects
@@ -84,6 +86,9 @@ public class UIInGame : UIPopup
         GetText((int)Texts.Item1Text).gameObject.SetActive(false);
         GetText((int)Texts.Item2Text).gameObject.SetActive(false);
 
+        GetText((int)Texts.Timer).gameObject.SetActive(false);
+        GetImage((int)Images.TimerImage).gameObject.SetActive(false);
+
         if (Managers.ScoreManager.LoadScore() == true)
         {
             // 점수를 내림차순으로 정렬
@@ -111,6 +116,14 @@ public class UIInGame : UIPopup
         Managers.ItemManager.OnRevivalToggleEvent -= UpdateReviveUI;
 
         Managers.GameManager.OnGameOverEvent -= DisableItemButtonsOnGameOver;
+    }
+
+    private void UpdateTimerUI()
+    {
+        // 타이머 갱신 및 3분 카운트 다운
+
+        // 3분 ~ 0분까지 시간 감소
+        // 0분 도달 시 게임 오버 호출
     }
 
     private void UpdateNextFruitImage(string fruitName)

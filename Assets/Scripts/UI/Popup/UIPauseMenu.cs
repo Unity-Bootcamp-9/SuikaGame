@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,15 +35,17 @@ public class UIPauseMenu : UIPopup
     private void OnClickGoBackButton()
     {
         Managers.ScoreManager.ResetAll();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
+        Managers.UI.ShowPopupUI<UIMain>();
         LoaderUtility.Deinitialize();
         LoaderUtility.Initialize();
     }
 
     private void OnClickReplaceBowlButton()
     {
-        // 그릇 재설치 함수 호출
-        Debug.Log("그릇 재설치");
+        SceneManager.LoadScene(1);
+        LoaderUtility.Deinitialize();
+        LoaderUtility.Initialize();
     }
 
     private void OnClickBackToGameButton()
