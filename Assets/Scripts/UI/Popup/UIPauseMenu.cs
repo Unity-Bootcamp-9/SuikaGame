@@ -35,23 +35,20 @@ public class UIPauseMenu : UIPopup
     private void OnClickGoBackButton()
     {
         Managers.ScoreManager.ResetAll();
+        Managers.GameManager.isGameOverDialogEnabled = false;
         SceneManager.LoadScene(0);
-        Managers.UI.ShowPopupUI<UIMain>();
         LoaderUtility.Deinitialize();
         LoaderUtility.Initialize();
     }
 
     private void OnClickReplaceBowlButton()
     {
-        SceneManager.LoadScene(1);
-        LoaderUtility.Deinitialize();
-        LoaderUtility.Initialize();
+        // ±×¸© Àç¼³Ä¡
+        Debug.Log("±×¸© Àç¼³Ä¡");
     }
 
     private void OnClickBackToGameButton()
     {
-        Managers.UI.ClosePopupUI(this);
-        //Managers.FruitsManager.GetComponent<ThrowFruit>().enabled = true;
-        Time.timeScale = 1;
+        Managers.UI.ClosePopupUI();
     }
 }

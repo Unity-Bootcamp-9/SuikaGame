@@ -252,7 +252,5 @@ public class UIInGame : UIPopup
     private void OnClickPauseButton()
     {
         Managers.UI.ShowPopupUI<UIPauseMenu>();
-        //Managers.FruitsManager.GetComponent<ThrowFruit>().enabled = false;
-        Time.timeScale = 0;
     }
 }
