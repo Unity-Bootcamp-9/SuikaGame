@@ -51,6 +51,10 @@ public class UIInGame : UIPopup
     List<ScoreData> scoreDataList;
     bool isPause;
 
+    float timer = 180f;
+    bool isTimaAttackMode;
+    bool isTimerRunning = false;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -101,7 +105,32 @@ public class UIInGame : UIPopup
             }
         }
 
+        if (isTimaAttackMode)
+        {
+            GetText((int)Texts.Timer).gameObject.SetActive(true);
+            GetImage((int)Images.TimerImage).gameObject.SetActive(true);
+            UpdateTimerUI();
+
+            isTimerRunning = true;
+        }
+
         return true;
+    }
+
+    private void Update()
+    {
+        if (isTimerRunning)
+        {
+            timer -= Time.deltaTime; // 매 프레임마다 타이머 감소
+            UpdateTimerUI();
+
+            if (timer <= 0)
+            {
+                timer = 0;
+                isTimerRunning = false;
+                Managers.GameManager.EnableGameOverDialog(); // 타이머가 0이 되면 게임 오버 호출
+            }
+        }
     }
 
     private void OnDisable()
@@ -124,6 +153,8 @@ public class UIInGame : UIPopup
 
         // 3분 ~ 0분까지 시간 감소
         // 0분 도달 시 게임 오버 호출
+        TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+        GetText((int)Texts.Timer).text = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 
     private void UpdateNextFruitImage(string fruitName)
