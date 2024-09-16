@@ -31,6 +31,8 @@ public class UIInGame : UIPopup
         // Item slot
         Item1,
         Item2,
+        Item1Background,
+        Item2Background,
         // Passive slot
         Revive
     }
@@ -156,12 +158,6 @@ public class UIInGame : UIPopup
         GetObject((int)GameObjects.ComboUI).gameObject.SetActive(false);
     }
 
-    private IEnumerator ResetComboCoroutine()
-    {
-        yield return new WaitForSeconds(3f);
-        HideComboUI();
-    }
-
     private Dictionary<Define.Item, string> itemNames = new Dictionary<Define.Item, string>
     {
         { Define.Item.LevelUp, "레벨 업" },
@@ -181,32 +177,39 @@ public class UIInGame : UIPopup
             {
                 GetImage((int)Images.Item1).gameObject.SetActive(true);
                 GetText((int)Texts.Item1Text).gameObject.SetActive(true);
-                Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
-                GetImage((int)Images.Item1).sprite = sprite;
+                GetImage((int)Images.Item1Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlot");
+                Sprite itemSprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
+                GetImage((int)Images.Item1).sprite = itemSprite;
                 GetText((int)Texts.Item1Text).text = $"{itemNames[(Define.Item)selectedItem]}";
             }
             else if (slotIndex == 1)
             {
                 GetImage((int)Images.Item2).gameObject.SetActive(true);
                 GetText((int)Texts.Item2Text).gameObject.SetActive(true);
-                Sprite sprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
-                GetImage((int)Images.Item2).sprite = sprite;
+                GetImage((int)Images.Item2Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlot");
+                Sprite itemSprite = Managers.Resource.Load<Sprite>($"Images/Items/{((Define.Item)selectedItem)}");
+                GetImage((int)Images.Item2).sprite = itemSprite;
                 GetText((int)Texts.Item2Text).text = $"{itemNames[(Define.Item)selectedItem]}";
             }
         }
         else
         {
+            GetImage((int)Images.Item1).GetComponent<UIEventHandler>().enabled = true;
+            GetImage((int)Images.Item2).GetComponent<UIEventHandler>().enabled = true;
             // 이미지 비활성화
             if (slotIndex == 0)
             {
                 GetImage((int)Images.Item1).gameObject.SetActive(false);
+                GetImage((int)Images.Item1Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlot");
                 GetText((int)Texts.Item1Text).text = "";
             }
             else if (slotIndex == 1)
             {
                 GetImage((int)Images.Item2).gameObject.SetActive(false);
+                GetImage((int)Images.Item2Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlot");
                 GetText((int)Texts.Item2Text).text = "";
             }
+
         }
     }
 
@@ -226,7 +229,18 @@ public class UIInGame : UIPopup
 
     private void OnClickItemButton(int index)
     {
-        Managers.ItemManager.ItemUse(index);
-
+        Managers.ItemManager.UseItem(index);
+        
+        GetImage((int)Images.Item1).GetComponent<UIEventHandler>().enabled = false;
+        GetImage((int)Images.Item2).GetComponent<UIEventHandler>().enabled = false;
+        
+        if (index == 0)
+        {
+            GetImage((int)Images.Item1Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlotUsing");
+        }
+        else if (index == 1)
+        {
+            GetImage((int)Images.Item2Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlotUsing");
+        }
     }
 }   

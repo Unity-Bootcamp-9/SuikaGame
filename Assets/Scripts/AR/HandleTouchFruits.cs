@@ -18,7 +18,7 @@ public class HandleTouchFruits : MonoBehaviour
     // touchPos로 현재 사용자가 터치한 스크린 좌표를 받아옴.
     private void OnTap(object sender, Vector2 touchPos)
     {
-        if (Managers.ItemManager.currentUsingItem == -1)
+        if (Managers.ItemManager.selectedSlot == -1 || Managers.ItemManager.slot[Managers.ItemManager.selectedSlot] == -1)
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(touchPos);
@@ -28,13 +28,13 @@ public class HandleTouchFruits : MonoBehaviour
             if (hit.transform.CompareTag("Fruit") && hit.transform.GetComponent<CheckGameOver>().InBowl)
             {
                 // 사용중인 아이템 체크
-                if ((Define.Item)Managers.ItemManager.currentUsingItem == Define.Item.Delete)
+                if ((Define.Item)Managers.ItemManager.slot[Managers.ItemManager.selectedSlot] == Define.Item.Delete)
                 {
                     Managers.ItemManager.DeleteItem(hit.transform.gameObject);
                     Debug.Log("접시 위 과일");
                 }
 
-                else if ((Define.Item)Managers.ItemManager.currentUsingItem == Define.Item.LevelUp)
+                else if ((Define.Item)Managers.ItemManager.slot[Managers.ItemManager.selectedSlot] == Define.Item.LevelUp)
                 {
                     Managers.ItemManager.LevelUpItem(hit.transform.gameObject);
                 }
