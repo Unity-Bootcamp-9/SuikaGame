@@ -13,9 +13,6 @@ public class UIModeSelect : UIPopup
         TimeAttackMode,
         GoBackButton
     }
-
-    public bool timeAttackMode = false;
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -32,6 +29,7 @@ public class UIModeSelect : UIPopup
 
     private void OnClickNormalMode()
     {
+        Managers.GameManager.timeAttackMode = false; // 일반 모드 설정
         SceneManager.LoadScene("InGame");
 
         LoaderUtility.Deinitialize();
@@ -40,12 +38,12 @@ public class UIModeSelect : UIPopup
 
     private void OnClickAttackMode()
     {
+        Managers.GameManager.timeAttackMode = true; // 타임어택 모드 설정
         SceneManager.LoadScene("InGame");
 
         LoaderUtility.Deinitialize();
         LoaderUtility.Initialize();
 
-        timeAttackMode = true;
         // 타임어택일때 불값으로 UIIngame에서 true인지 확인하고
         // 타이머를 초기화 하는 로직이 필요할듯
     }
