@@ -280,7 +280,6 @@ public class UIInGame : UIPopup
 
     private void OnClickItemButton(int index)
     {
-        Managers.ItemManager.ItemUse(index);
         Managers.ItemManager.UseItem(index);
         
         GetImage((int)Images.Item1).GetComponent<UIEventHandler>().enabled = false;
