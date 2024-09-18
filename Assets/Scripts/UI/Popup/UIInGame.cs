@@ -52,7 +52,7 @@ public class UIInGame : UIPopup
     bool isPause;
 
     float timer = 180f;
-    bool isTimaAttackMode;
+    bool isTimeAttackMode;
     bool isTimerRunning = false;
 
     public override bool Init()
@@ -90,8 +90,21 @@ public class UIInGame : UIPopup
         GetText((int)Texts.Item1Text).gameObject.SetActive(false);
         GetText((int)Texts.Item2Text).gameObject.SetActive(false);
 
-        GetText((int)Texts.Timer).gameObject.SetActive(false);
-        GetImage((int)Images.TimerImage).gameObject.SetActive(false);
+
+        if (GetComponent<UIModeSelect>().timeAttackMode == true)
+        {
+            GetImage((int)Images.TimerImage).gameObject.SetActive(true);
+            GetText((int)Texts.Timer).gameObject.SetActive(true);
+            isTimeAttackMode = true;
+        }
+        else
+        {
+            GetImage((int)Images.TimerImage).gameObject.SetActive(false);
+            GetText((int)Texts.Timer).gameObject.SetActive(false);
+            UpdateTimerUI();  // 타이머 UI 업데이트
+
+            isTimerRunning = true;
+        }
 
         if (Managers.ScoreManager.LoadScore() == true)
         {
@@ -105,7 +118,7 @@ public class UIInGame : UIPopup
             }
         }
 
-        if (isTimaAttackMode)
+        if (isTimeAttackMode)
         {
             GetText((int)Texts.Timer).gameObject.SetActive(true);
             GetImage((int)Images.TimerImage).gameObject.SetActive(true);
@@ -123,6 +136,7 @@ public class UIInGame : UIPopup
         {
             timer -= Time.deltaTime; // 매 프레임마다 타이머 감소
             UpdateTimerUI();
+            Debug.Log("시간 감소");
 
             if (timer <= 0)
             {
