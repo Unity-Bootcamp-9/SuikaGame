@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UIInGame : UIPopup
 {
@@ -17,12 +18,16 @@ public class UIInGame : UIPopup
         ComboMultiText,
         BestScore,
         Item1Text,
-        Item2Text
+        Item2Text,
+        Timer
     }
 
     // 버튼
     enum Buttons
     {
+        Back,
+        Pause,
+        Replace
     }
 
     enum Images
@@ -34,7 +39,10 @@ public class UIInGame : UIPopup
         Item1Background,
         Item2Background,
         // Passive slot
-        Revive
+        Revive,
+        // Pause Menu
+        Pause,
+        TimerImage
     }
 
     enum GameObjects
@@ -43,7 +51,10 @@ public class UIInGame : UIPopup
     }
 
     List<ScoreData> scoreDataList;
+    bool isPause;
 
+    float timer = 180f;
+    bool isTimerRunning = false;
 
     public override bool Init()
     {
@@ -52,11 +63,12 @@ public class UIInGame : UIPopup
 
         BindImage(typeof(Images));
         BindText(typeof(Texts));
-
+        BindButton(typeof(Buttons));
         BindObject(typeof(GameObjects));
 
         GetImage((int)Images.Item1).gameObject.BindEvent(() => OnClickItemButton(0));
         GetImage((int)Images.Item2).gameObject.BindEvent(() => OnClickItemButton(1));
+        GetImage((int)Images.Pause).gameObject.BindEvent(() => OnClickPauseButton());
 
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent += UpdateNextFruitImage;
         Managers.FruitRandomSpawnManager.Init();
@@ -79,6 +91,19 @@ public class UIInGame : UIPopup
         GetText((int)Texts.Item1Text).gameObject.SetActive(false);
         GetText((int)Texts.Item2Text).gameObject.SetActive(false);
 
+
+        if (Managers.GameManager.timeAttackMode == true)
+        {
+            GetImage((int)Images.TimerImage).gameObject.SetActive(true);
+            GetText((int)Texts.Timer).gameObject.SetActive(true);
+            isTimerRunning = true;  // 타이머 시작
+        }
+        else
+        {
+            GetImage((int)Images.TimerImage).gameObject.SetActive(false);
+            GetText((int)Texts.Timer).gameObject.SetActive(false);
+        }
+
         if (Managers.ScoreManager.LoadScore() == true)
         {
             // 점수를 내림차순으로 정렬
@@ -94,6 +119,22 @@ public class UIInGame : UIPopup
         return true;
     }
 
+    private void Update()
+    {
+        if (isTimerRunning)
+        {
+            timer -= Time.deltaTime; // 매 프레임마다 타이머 감소
+            UpdateTimerUI();
+
+            if (timer <= 0)
+            {
+                timer = 0;
+                isTimerRunning = false;
+                Managers.GameManager.EnableGameOverDialog(); // 타이머가 0이 되면 게임 오버 호출
+            }
+        }
+    }
+
     private void OnDisable()
     {
         Managers.FruitRandomSpawnManager.OnChangeRandomEvent -= UpdateNextFruitImage;
@@ -106,6 +147,16 @@ public class UIInGame : UIPopup
         Managers.ItemManager.OnRevivalToggleEvent -= UpdateReviveUI;
 
         Managers.GameManager.OnGameOverEvent -= DisableItemButtonsOnGameOver;
+    }
+
+    private void UpdateTimerUI()
+    {
+        // 타이머 갱신 및 3분 카운트 다운
+
+        // 3분 ~ 0분까지 시간 감소
+        // 0분 도달 시 게임 오버 호출
+        TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+        GetText((int)Texts.Timer).text = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 
     private void UpdateNextFruitImage(string fruitName)
@@ -243,4 +294,9 @@ public class UIInGame : UIPopup
             GetImage((int)Images.Item2Background).sprite = Managers.Resource.Load<Sprite>($"Images/UI/ItemSlotUsing");
         }
     }
-}   
+
+    private void OnClickPauseButton()
+    {
+        Managers.UI.ShowPopupUI<UIPauseMenu>();
+    }
+}

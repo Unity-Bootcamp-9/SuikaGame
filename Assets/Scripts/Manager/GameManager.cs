@@ -1,9 +1,11 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 
 public class GameManager
 {
     public bool isGameOverDialogEnabled = false;
+    public bool timeAttackMode = false;
     public delegate void OnGameOver();
     public event OnGameOver OnGameOverEvent;
 

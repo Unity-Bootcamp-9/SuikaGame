@@ -10,13 +10,12 @@ public class InGameScene : BaseScene
         Managers.ItemManager.ResetState();
 
         SceneType = Define.Scene.Game;
+
         Managers.UI.ShowPopupUI<UIConfirmDialog>().SetDialog(
             MoveToInstallBowlStep,
-            "ì•ˆë‚´",
-            "í™”ë©´ì„ ëŒë¦¬ë©´ì„œ í‰ë©´ì„ ì¸ì‹í•œ í›„\në°”ë‹¥ì„ í„°ì¹˜í•˜ì—¬ ê·¸ë¦‡ì„ ì„¤ì¹˜í•˜ì„¸ìš”.",
-            "í™•ì¸");
-
-        Debug.Log("Init");
+            "¾È³»",
+            "È­¸éÀ» µ¹¸®¸é¼­ Æò¸éÀ» ÀÎ½ÄÇÑ ÈÄ\n¹Ù´ÚÀ» ÅÍÄ¡ÇÏ¿© ±×¸©À» ¼³Ä¡ÇÏ¼¼¿ä.",
+            "È®ÀÎ");
 
         return true;
     }

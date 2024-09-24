@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FruitsManager
+public class FruitsManager : MonoBehaviour
 {
     public GameObject InstantiateFruit(FruitsData fruitsData, Vector3 position, bool isMerged = false)
     {
@@ -31,6 +31,7 @@ public class FruitsManager
             return null;
         }
     }
+
 /*
     public GameObject InstantiateFruit(Transform targetParent, FruitsData fruitsData, Vector3 position, bool isMerged = false)
     {

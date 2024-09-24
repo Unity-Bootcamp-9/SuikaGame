@@ -38,10 +38,8 @@ public class UIMain : UIPopup
 
     void OnClickStartButton()
     {
-        SceneManager.LoadScene("InGame");
-
-        LoaderUtility.Deinitialize();
-        LoaderUtility.Initialize();
+        Managers.UI.ClosePopupUI(this);
+        Managers.UI.ShowPopupUI<UIModeSelect>();
     }
 
     void OnClickScoreBoardButton()
